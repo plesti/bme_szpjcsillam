@@ -1,0 +1,39 @@
+Modell
+================
+
+abstract PalyaElem
+================
+kolbasz
+onStepIn()
+onStepOut()
+
+Fal, Mérleg, Szakadék, Doboz, Oneill, ZPM, Portál, Ajtó, Pajzsgenerator(4db)
+
+Jatekos
+================
+
+Palya
+================
+zpmszamlalo
+zpmmax
+jatekosok
+
+sync mozog(jatekosid,pozx, pozy)
+addPalyaelem(Palyaelem p, pozx, pozy)
+movePalyaelem(mit, hovax, hovay) -> for elemek ahol mit
+removePalyaelem(mit)
+getPalyaelemek(pozx, pozy)
+
+palyaelemlista
+================
+pozicio
+elemek(Map) : [szakadék, doboz]
+
+Controll
+================
+mozogOneill(irany) 
+dobozFelvesz()
+dobozLetesz()
+portalNyitasKek() -> add(Palyaelem)
+portalNyitasSarga()
+private ZPMFelvesz()
