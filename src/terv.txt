@@ -7,8 +7,10 @@ kolbasz
 onStepIn()
 onStepOut()
 
-Fal, Mérleg, Szakadék, Doboz, Oneill, ZPM, Portál, Ajtó, Pajzsgenerator(4db)
+Fal,  Szakadék, Doboz, Oneill
 
+Mérleg, PortálFal,Pajzsgenerator(4db), Ajtó
+ZPM
 Jatekos
 ================
 

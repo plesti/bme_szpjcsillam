@@ -3,19 +3,20 @@ package hu.gghf.model;
 import java.awt.*;
 
 public abstract class GameObject {
-    Point position;
+    private Point position;
+    private int objecttype;
+    private GameObject childObject;
+    private boolean stepable;
 
-    /**
-     * @return
-     */
-    public Point getPosition() {
-        return position;
+    public int getType() {
+        return objecttype;
     }
 
-    /**
-     * @param position
-     */
-    public void setPosition(Point position) {
-        this.position = position;
+    public GameObject getChildObject() {
+        return childObject;
+    }
+
+    public boolean isStepable() {
+        return stepable;
     }
 }

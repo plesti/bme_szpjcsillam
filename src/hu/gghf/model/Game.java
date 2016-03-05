@@ -1,5 +1,7 @@
 package hu.gghf.model;
 
+import hu.gghf.Application;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -13,6 +15,10 @@ public class Game {
     Player player;
     ArrayList<GameObject> gameObjects;
     GameEvents events;
+
+    public Game(Application app) {
+
+    }
 
     public void loadMap(String filepath) {
 
