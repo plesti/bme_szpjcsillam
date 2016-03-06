@@ -4,7 +4,6 @@ import java.awt.*;
 
 public abstract class AbstractGameObject {
     private Point position;
-    private int objecttype = -1;
     public AbstractGameObject childObject;
 
     public void setChildObject(AbstractGameObject object) { childObject = object; }
