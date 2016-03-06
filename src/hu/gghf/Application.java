@@ -2,7 +2,7 @@ package hu.gghf;
 
 import hu.gghf.model.Game;
 import hu.gghf.model.GameEvents;
-import hu.gghf.model.Player;
+import hu.gghf.entities.Player;
 
 public class Application implements GameEvents {
     private static Game game;
