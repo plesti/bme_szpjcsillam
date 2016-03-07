@@ -20,4 +20,8 @@ public class Player {
 
     public AbstractGameObject getBindObject() { return bindObject; }
     public void setBindObject(AbstractGameObject box) { this.bindObject = box; }
+
+    public void addZPM() {
+        zpmCounter += 1;
+    }
 }

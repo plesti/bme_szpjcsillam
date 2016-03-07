@@ -22,11 +22,12 @@ public class Game {
     }
 
     public void loadMap(String filepath) {
-        player = new Player(DIRECTION_UP ,start);
 
         // TODO: forloop fajlban
-
         events.mapLoaded();
+
+        player = new Player(DIRECTION_UP ,start);
+
     }
 
     public void movePlayer(int dir) {
@@ -34,14 +35,19 @@ public class Game {
         Point playerPos = player.getPosition();
 
         Point newPos = new Point(playerPos.x + addvector.x, playerPos.y + addvector.y);
-        AbstractGameObject targetObject = map[newPos.x][newPos.y];
+        AbstractGameObject targetObject = getObject(newPos.x, newPos.y);
 
         if (!map[newPos.x][newPos.y].isStepable())
             return;
 
-        if (targetObject.getClass() == Hole.class) {
+        Class targetClass = targetObject.getClass();
+
+        if (targetClass == Hole.class) {
             events.playerDies(player);
             return;
+        }
+        else if (targetClass == ZPM.class) {
+            player.addZPM();
         }
 
         if (player.isCarry()) {
@@ -74,8 +80,21 @@ public class Game {
         }
     }
 
-    public void bindBox(Box box) {
-        player.setBindObject(box);
+    public AbstractGameObject getObject(int x, int y) {
+        return map[x][y];
+    }
+
+    public void bindBox() {
+        Box box = (Box) objectInFront();
+        if (box.getClass() == Box.class) {
+            player.setBindObject(box);
+        } else {
+            events.sendError("Nincs doboz. Álj elé");
+        }
+    }
+
+    private AbstractGameObject objectInFront() {
+        return null;
     }
 
     public void openPortal(int type) {

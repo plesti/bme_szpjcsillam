@@ -14,7 +14,6 @@ public class Application implements GameEvents {
 
         game = new Game(app);
         controller = new Controller(game);
-
     }
 
     @Override
