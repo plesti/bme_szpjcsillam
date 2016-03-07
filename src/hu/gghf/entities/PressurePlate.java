@@ -1,6 +1,6 @@
 package hu.gghf.entities;
 
-public class PressurePlate extends AbstractGameObject {
+public class PressurePlate extends AbstractCell {
     Door door;
 
     public PressurePlate(Door door) {
@@ -9,18 +9,18 @@ public class PressurePlate extends AbstractGameObject {
 
     @Override
     public boolean isStepable() {
-        return childObject != null;
+        return true;
     }
 
     @Override
-    public void stepOn(AbstractGameObject object) {
-        super.stepOn(object);
+    public void onStepIn(Moveable obj) {
+        super.onStepIn(obj);
         door.setOpen(true);
     }
 
     @Override
-    public void stepOut() {
-        super.stepOut();
+    public void onStepOut() {
+        super.onStepOut();
         door.setOpen(false);
     }
 }

@@ -1,8 +1,8 @@
 package hu.gghf.entities;
 
-public class EmptyCell extends AbstractGameObject {
+public class EmptyCell extends AbstractCell {
     @Override
     public boolean isStepable() {
-        return childObject == null;
+        return true;
     }
 }

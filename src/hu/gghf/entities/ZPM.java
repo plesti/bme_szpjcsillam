@@ -1,6 +1,7 @@
 package hu.gghf.entities;
 
-public class ZPM extends AbstractGameObject {
+public class ZPM extends AbstractCell {
+    private boolean discovered = false;
 
     @Override
     public boolean isStepable() {
@@ -8,12 +9,12 @@ public class ZPM extends AbstractGameObject {
     }
 
     @Override
-    public void stepOn(AbstractGameObject object) {
-        super.stepOn(object);
-    }
+    public void onStepIn(Moveable obj) {
+        super.onStepIn(obj);
 
-    @Override
-    public void stepOut() {
-        super.stepOut();
+        if (!discovered && obj.getClass() == Player.class) {
+            Player player = (Player) obj;
+            player.addZPM();
+        }
     }
 }

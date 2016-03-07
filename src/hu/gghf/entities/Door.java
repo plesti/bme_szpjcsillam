@@ -1,9 +1,6 @@
 package hu.gghf.entities;
 
-/**
- * Created by QPAKSSD on 2016.03.05..
- */
-public class Door extends AbstractGameObject {
+public class Door extends AbstractCell {
     private boolean open = false;
 
     @Override

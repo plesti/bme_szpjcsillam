@@ -1,16 +1,38 @@
 package hu.gghf.entities;
 
-public class PortalWall extends AbstractGameObject {
-    public static PortalWall blue = null;
-    public static PortalWall yellow = null;
-    private boolean open = false;
+import java.awt.*;
+
+public class PortalWall extends AbstractCell {
+    private static PortalWall blue = null;
+    private static PortalWall yellow = null;
+    private Point position;
+
+    public PortalWall(Point position) {
+        this.position = position;
+    }
 
     @Override
     public boolean isStepable() {
-        return blue != null && yellow != null && open;
+        if (blue == this  && yellow != null) {
+            return true;
+        } else if (yellow == this  && blue != null) {
+            return true;
+        }
+        return false;
     }
 
-    public void setOpen(boolean isopen) {
-        open = isopen;
+    @Override
+    public void onStepIn(Moveable obj) {
+        super.onStepIn(obj);
+
+        if (blue == this  && yellow != null) {
+            obj.setPosition(yellow.getPosition());
+        } else if (yellow == this  && blue != null) {
+            obj.setPosition(blue.getPosition());
+        }
+    }
+
+    private Point getPosition() {
+        return position;
     }
 }
