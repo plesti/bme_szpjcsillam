@@ -1,5 +1,7 @@
 package hu.gghf.entities;
 
+import hu.gghf.model.Game;
+
 import java.awt.*;
 
 public class PortalWall extends AbstractCell {
@@ -34,5 +36,13 @@ public class PortalWall extends AbstractCell {
 
     private Point getPosition() {
         return position;
+    }
+
+    public void setColour(int color) {
+        if (color == Game.PORTAL_BLUE) {
+            blue = this;
+        } else {
+            yellow = this;
+        }
     }
 }
