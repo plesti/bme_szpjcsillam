@@ -3,6 +3,7 @@ package hu.gghf.model;
 import hu.gghf.entities.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public class Game {
@@ -12,116 +13,65 @@ public class Game {
     public static final int DIRECTION_RIGHT = 3;
     public static final int PORTAL_BLUE = 0;
     public static final int PORTAL_YELLOW = 1;
-    private final Point start = new Point(10, 10);
+
     private Player player;
-    private AbstractGameObject[][] map;
-    private GameEvents events;
+    private AbstractCell[][] map;
+    private ArrayList<Box> boxes;
 
-    public Game(GameEvents app) {
-        events = app;
+    public static Game startGame() {
+        return null;
+    }
+    public void movePlayer(int direction) {
     }
 
-    public void loadMap(String filepath) {
-
-        // TODO: forloop fajlban
-        events.mapLoaded();
-
-        player = new Player(DIRECTION_UP ,start);
+    private void goForward() {
+    }
+    private void turn(int direction) {
 
     }
 
-    public void movePlayer(int dir) {
-        Point addvector = directionToVector(dir);
-        Point playerPos = player.getPosition();
-
-        Point newPos = new Point(playerPos.x + addvector.x, playerPos.y + addvector.y);
-        AbstractGameObject targetObject = getObject(newPos.x, newPos.y);
-
-        if (!map[newPos.x][newPos.y].isStepable())
-            return;
-
-        Class targetClass = targetObject.getClass();
-
-        if (targetClass == Hole.class) {
-            events.playerDies(player);
-            return;
-        }
-        else if (targetClass == ZPM.class) {
-            player.addZPM();
-        }
-
-        if (player.isCarry()) {
-            AbstractGameObject carryObject = player.getBindObject();
-            Point carryNewPos = new Point(playerPos.x + 2*addvector.x, playerPos.y + 2*addvector.y);
-
-            if (!moveObject(carryObject, carryNewPos)) {
-                return;
-            }
-        }
-        player.setPosition(newPos);
+    public AbstractCell getMapObject(Point point) {
+        return map[point.x][point.y];
     }
 
-    private boolean moveObject(AbstractGameObject object, Point newpoint) {
-        AbstractGameObject placeTo = map[newpoint.x][newpoint.y];
-        if (placeTo != null && placeTo.isStepable()) {
-            if (placeTo.getClass() == PortalWall.class) {
-                if (PortalWall.blue == placeTo) {
-                    newpoint = PortalWall.yellow.getPosition();
-                } else {
-                    newpoint = PortalWall.blue.getPosition();
-                }
-            }
-            map[object.getPosition().x][object.getPosition().y].setChildObject(null);
-            map[newpoint.x][newpoint.y].setChildObject(object);
-
-            return true;
-        } else {
-            return false;
-        }
+    public boolean isBox(Point point) {
+        return false;
+    }
+    public Box getBox(Point point) {
+        return null;
     }
 
-    public AbstractGameObject getObject(int x, int y) {
-        return map[x][y];
-    }
-
-    public void bindBox() {
-        Box box = (Box) objectInFront();
-        if (box.getClass() == Box.class) {
-            player.setBindObject(box);
-        } else {
-            events.sendError("Nincs doboz. Álj elé");
-        }
-    }
-
-    private AbstractGameObject objectInFront() {
+    private Point posInDirection(int direction, int distance) {
+//        switch (dir) {
+//            case DIRECTION_UP:
+//                return new Point(0, 1);
+//            case DIRECTION_DOWN:
+//                return new Point(0, -1);
+//            case DIRECTION_LEFT:
+//                return new Point(-1, 0);
+//            case DIRECTION_RIGHT:
+//                return new Point(1, 0);
+//        }
         return null;
     }
 
     public void openPortal(int type) {
-        AbstractGameObject target = findTarget();
+        AbstractCell target = findTarget();
     }
 
-    private Point directionToVector(int dir) {
-        switch (dir) {
-            case DIRECTION_UP:
-                return new Point(0, 1);
-            case DIRECTION_DOWN:
-                return new Point(0, -1);
-            case DIRECTION_LEFT:
-                return new Point(-1, 0);
-            case DIRECTION_RIGHT:
-                return new Point(1, 0);
-        }
+    private AbstractCell findTarget() {
         return null;
     }
 
-    /** Megkeresi a szemkozti falat
-     * @return
-     */
-    private AbstractGameObject findTarget() {
-        // TODO: player directiont kell lekerdezni es a mapot bejarni elorefele addig, amig nem talal isStepable-t, vagy
-        // kier a palyarol
+    public void pickUpBox() {
 
-        return null;
     }
+    public void dropBox() {
+        player.setCarry(null);
+    }
+
+    public int invertDirection(int direction) {
+        return 0;
+    }
+
 }
