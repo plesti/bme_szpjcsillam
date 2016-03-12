@@ -18,27 +18,24 @@ public class Game {
     private AbstractCell[][] map;
     private ArrayList<Box> boxes;
 
-    public static Game startGame() {
-        return null;
-    }
     public void movePlayer(int direction) {
     }
 
     private void goForward() {
     }
     private void turn(int direction) {
-
     }
 
-    public AbstractCell getMapObject(Point point) {
-        return map[point.x][point.y];
-    }
+    public AbstractCell getMapObject(Point point) { return map[point.x][point.y]; }
+    public void setMapObject(Point point, AbstractCell cell) { map[point.x][point.y] = cell; }
 
     public boolean isBox(Point point) {
         return false;
     }
     public Box getBox(Point point) {
         return null;
+    }
+    public void setBox(Point point) {
     }
 
     private Point posInDirection(int direction, int distance) {

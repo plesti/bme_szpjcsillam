@@ -1,7 +1,7 @@
 package hu.gghf.entities;
 
 public class PressurePlate extends AbstractCell {
-    Door door;
+    private Door door;
 
     public PressurePlate(Door door) {
         this.door = door;

@@ -11,4 +11,9 @@ public class Door extends AbstractCell {
     public void setOpen(boolean isopen) {
         open = isopen;
     }
+
+    @Override
+    public boolean isShootable() {
+        return !open;
+    }
 }

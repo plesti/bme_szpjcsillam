@@ -5,4 +5,9 @@ public class Wall extends AbstractCell {
     public boolean isStepable() {
         return false;
     }
+
+    @Override
+    public boolean isShootable() {
+        return true;
+    }
 }

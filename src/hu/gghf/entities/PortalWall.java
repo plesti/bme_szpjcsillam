@@ -13,6 +13,10 @@ public class PortalWall extends AbstractCell {
         this.position = position;
     }
 
+    private Point getPosition() {
+        return position;
+    }
+
     @Override
     public boolean isStepable() {
         if (blue == this  && yellow != null) {
@@ -24,21 +28,23 @@ public class PortalWall extends AbstractCell {
     }
 
     @Override
-    public void onStepIn(Moveable obj) {
-        super.onStepIn(obj);
+    public void onStepIn(Moveable object) {
+        super.onStepIn(object);
 
         if (blue == this  && yellow != null) {
-            obj.setPosition(yellow.getPosition());
+            object.setPosition(yellow.getPosition());
         } else if (yellow == this  && blue != null) {
-            obj.setPosition(blue.getPosition());
+            object.setPosition(blue.getPosition());
         }
     }
 
-    private Point getPosition() {
-        return position;
+    @Override
+    public boolean isShootable() {
+        return true;
     }
 
-    public void setColour(int color) {
+    @Override
+    public void shoot(Player player, int color) {
         if (color == Game.PORTAL_BLUE) {
             blue = this;
         } else {
