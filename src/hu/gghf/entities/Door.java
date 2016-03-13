@@ -1,19 +1,25 @@
 package hu.gghf.entities;
 
-public class Door extends AbstractCell {
+public class Door implements CellInterface {
     private boolean open = false;
+
+    public void setOpen(boolean isopen) { open = isopen; }
 
     @Override
     public boolean isStepable() {
         return open;
     }
 
-    public void setOpen(boolean isopen) {
-        open = isopen;
-    }
+    @Override
+    public void onStepIn(Location object) { }
 
     @Override
-    public boolean isShootable() {
-        return !open;
+    public void onStepOut() { }
+
+    @Override
+    public boolean isShootable() { return !open; }
+
+    @Override
+    public void shoot(Player player, Color color) {
     }
 }

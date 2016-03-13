@@ -7,15 +7,10 @@ import java.util.ArrayList;
 
 
 public class Game {
-    public static final int DIRECTION_UP = 0;
-    public static final int DIRECTION_DOWN = 1;
-    public static final int DIRECTION_LEFT = 2;
-    public static final int DIRECTION_RIGHT = 3;
-    public static final int PORTAL_BLUE = 0;
-    public static final int PORTAL_YELLOW = 1;
+    public static int zpm_counter = 0;
 
     private Player player;
-    private AbstractCell[][] map;
+    private CellInterface[][] map;
     private ArrayList<Box> boxes;
 
     public void movePlayer(int direction) {
@@ -26,8 +21,8 @@ public class Game {
     private void turn(int direction) {
     }
 
-    public AbstractCell getMapObject(Point point) { return map[point.x][point.y]; }
-    public void setMapObject(Point point, AbstractCell cell) { map[point.x][point.y] = cell; }
+    public CellInterface getMapObject(Point point) { return map[point.x][point.y]; }
+    public void setMapObject(Point point, CellInterface cell) { map[point.x][point.y] = cell; }
 
     public boolean isBox(Point point) {
         return false;
@@ -53,10 +48,10 @@ public class Game {
     }
 
     public void openPortal(int type) {
-        AbstractCell target = findTarget();
+        CellInterface target = findTarget();
     }
 
-    private AbstractCell findTarget() {
+    private CellInterface findTarget() {
         return null;
     }
 
@@ -71,4 +66,15 @@ public class Game {
         return 0;
     }
 
+    public void win() {
+        System.out.println("Nyertel genyo!");
+    }
+
+    public void addZPM() {
+        zpm_counter = zpm_counter + 1;
+    }
+
+    public int getZpmCount() {
+        return zpm_counter;
+    }
 }

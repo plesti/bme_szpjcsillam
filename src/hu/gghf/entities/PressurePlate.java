@@ -1,6 +1,6 @@
 package hu.gghf.entities;
 
-public class PressurePlate extends AbstractCell {
+public class PressurePlate implements CellInterface {
     private Door door;
 
     public PressurePlate(Door door) {
@@ -14,13 +14,16 @@ public class PressurePlate extends AbstractCell {
 
     @Override
     public void onStepIn(Location obj) {
-        super.onStepIn(obj);
         door.setOpen(true);
     }
 
     @Override
     public void onStepOut() {
-        super.onStepOut();
         door.setOpen(false);
     }
+
+    @Override
+    public boolean isShootable() { return false; }
+    @Override
+    public void shoot(Player player, Color color) { }
 }

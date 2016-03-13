@@ -2,7 +2,9 @@ package hu.gghf.entities;
 
 import java.awt.*;
 
-public class Location {
+public abstract class Location {
+    public enum Direction { UP, DOWN, WEST, EAST }
+
     private Point position;
     private int direction;
 
@@ -11,4 +13,9 @@ public class Location {
 
     public int getDirection() { return direction; }
     public void setDirection(int direction) { this.direction = direction; }
+
+    /**
+     * Ez hivodik meg ha szakadekba lep.
+     */
+    public abstract void destroy();
 }
