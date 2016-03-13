@@ -28,7 +28,7 @@ public class PortalWall extends AbstractCell {
     }
 
     @Override
-    public void onStepIn(Moveable object) {
+    public void onStepIn(Location object) {
         super.onStepIn(object);
 
         if (blue == this  && yellow != null) {

@@ -2,7 +2,7 @@ package hu.gghf.entities;
 
 public abstract class AbstractCell {
     public abstract boolean isStepable();
-    public void onStepIn(Moveable object) {
+    public void onStepIn(Location object) {
     }
     public void onStepOut() {
     }

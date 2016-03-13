@@ -2,7 +2,7 @@ package hu.gghf.entities;
 
 import java.awt.*;
 
-public class Moveable {
+public class Location {
     private Point position;
     private int direction;
 

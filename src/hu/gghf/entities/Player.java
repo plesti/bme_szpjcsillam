@@ -1,6 +1,6 @@
 package hu.gghf.entities;
 
-public class Player extends Moveable {
+public class Player extends Location {
     private Box carryObject;
     private int zpmCounter;
 

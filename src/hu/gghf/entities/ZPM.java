@@ -9,7 +9,7 @@ public class ZPM extends AbstractCell {
     }
 
     @Override
-    public void onStepIn(Moveable obj) {
+    public void onStepIn(Location obj) {
         super.onStepIn(obj);
 
         if (!discovered && obj.getClass() == Player.class) {
