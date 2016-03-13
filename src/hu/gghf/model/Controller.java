@@ -3,12 +3,13 @@ package hu.gghf.model;
 import hu.gghf.entities.*;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class Controller {
     private Player player;
     private Game game;
 
-    public Controller() {
+    public Controller() throws IOException {
         game = new Game();
         player = new Player(game);
     }

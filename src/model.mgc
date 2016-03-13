@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="hu.gghf.entities.ShieldGenerator" x="6" y="122">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+        <Association destinationClassName="hu.gghf.model.Game"
+            endpointName="game" kind="Simple"/>
+        <Communication destinationClassName="hu.gghf.model.Game"/>
+    </Class>
+    <Class name="hu.gghf.entities.ZPM" x="12" y="319">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+        <Association destinationClassName="hu.gghf.model.Game"
+            endpointName="game" kind="Simple"/>
+        <Communication destinationClassName="hu.gghf.model.Game"/>
+    </Class>
+    <Class name="hu.gghf.entities.Location" x="188" y="351">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="hu.gghf.entities.CellInterface" x="250" y="186">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="hu.gghf.entities.Location.Direction" x="563" y="481">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="hu.gghf.entities.Door" x="8" y="215">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+    </Class>
+    <Class name="hu.gghf.entities.Player" x="304" y="466">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="hu.gghf.entities.Location"/>
+        <Association destinationClassName="hu.gghf.entities.Box"
+            endpointName="carryObject" kind="Simple"/>
+    </Class>
+    <Class name="hu.gghf.model.Game" x="395" y="66">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="hu.gghf.entities.Box"
+            endpointName="boxes" kind="Simple"/>
+        <Association destinationClassName="hu.gghf.entities.Player"
+            endpointName="player" kind="Simple"/>
+        <Communication destinationClassName="hu.gghf.entities.Player"/>
+    </Class>
+    <Class name="hu.gghf.entities.Hole" x="2" y="27">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+        <Communication destinationClassName="hu.gghf.entities.Location"/>
+    </Class>
+    <Class name="hu.gghf.entities.PortalWall" x="19" y="507">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="hu.gghf.entities.Location"/>
+        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+        <Communication destinationClassName="hu.gghf.entities.Location"/>
+    </Class>
+    <Class name="hu.gghf.entities.Box" x="439" y="464">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="hu.gghf.entities.Location"/>
+    </Class>
+    <Class name="hu.gghf.entities.PressurePlate" x="225" y="18">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+        <Association destinationClassName="hu.gghf.entities.Door"
+            endpointName="door" kind="Simple"/>
+        <Communication destinationClassName="hu.gghf.entities.Door"/>
+    </Class>
+    <Class name="hu.gghf.entities.CellInterface.Color" x="641" y="490">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="hu.gghf.entities.Wall" x="21" y="422">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+    </Class>
+    <Class name="hu.gghf.entities.EmptyCell" x="531" y="360">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+    </Class>
+</ClassDiagram>

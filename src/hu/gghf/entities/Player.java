@@ -75,12 +75,12 @@ public class Player extends Location {
 
             if (iscarry) {
                 Point frontpos2 = posInDirection(dir, 2);
-                CellInterface front2 = game.getMapObject(frontpos2);
+                CellInterface frontcell2 = game.getMapObject(frontpos2);
 
                 Box getbox2 = game.getBox(frontpos2);
 
                 // Ha nincs elotte doboz es kettovel elotte ures
-                if (front2.isStepable() && getbox2 == null) {
+                if (frontcell2.isStepable() && getbox2 == null) {
                     currentcell.onStepOut();
                     frontcell.onStepOut();
 
@@ -93,7 +93,7 @@ public class Player extends Location {
 
                     Box box = getCarry();
                     box.setPosition(newfront);
-                    front2.onStepIn(box);
+                    frontcell2.onStepIn(box);
                 }
 
             } else if (!iscarry && getbox == null) {
