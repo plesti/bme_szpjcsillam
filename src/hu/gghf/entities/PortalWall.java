@@ -40,12 +40,27 @@ public class PortalWall extends Location implements CellInterface {
 
     @Override
     public void shoot(Player player, Color color) {
-        // TODO: setDirection()
-
         if (color == Color.BLUE) {
             blue = this;
         } else {
             yellow = this;
+        }
+
+        Direction pdir = player.getDirection();
+
+        switch (pdir) {
+            case UP:
+                setDirection(Direction.DOWN);
+                break;
+            case DOWN:
+                setDirection(Direction.UP);
+                break;
+            case LEFT:
+                setDirection(Direction.RIGHT);
+                break;
+            case RIGHT:
+                setDirection(Direction.LEFT);
+                break;
         }
     }
 

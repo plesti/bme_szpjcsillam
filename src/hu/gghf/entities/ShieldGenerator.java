@@ -10,13 +10,13 @@ public class ShieldGenerator implements CellInterface {
 
     @Override
     public boolean isStepable() {
-        return false;
+        return true;
     }
 
     @Override
     public void onStepIn(Location object) {
         if (game.getZpmCount() == 4) {
-            game.win();
+            System.out.println("Nyertel!");
         }
     }
 

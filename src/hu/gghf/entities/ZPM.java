@@ -25,7 +25,6 @@ public class ZPM implements CellInterface {
 
     @Override
     public void onStepOut() {
-
     }
 
     @Override
