@@ -29,7 +29,7 @@ public class Game {
         	String[] params = line.split(";");
         	int paramslength = params.length;
         	for (int i = 0; i<paramslength; i++) {
-        		char c = params[i-1].charAt(0);
+        		char c = params[i].charAt(0);
         		switch (c) {
         		case '0': 
         			this.setMapObject(new Point(y,i), new EmptyCell());
