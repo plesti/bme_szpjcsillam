@@ -41,9 +41,7 @@ public class Game {
         			break;
         		}
         	}
-        	
         }
-        
     }
 
     public CellInterface getMapObject(Point point) { return map[point.x][point.y]; }

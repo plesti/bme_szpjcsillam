@@ -24,8 +24,10 @@ public class PortalWall extends Location implements CellInterface {
     public void onStepIn(Location object) {
         if (blue == this  && yellow != null) {
             object.setPosition(yellow.getPosition());
+            object.setDirection(yellow.getDirection());
         } else if (yellow == this  && blue != null) {
             object.setPosition(blue.getPosition());
+            object.setDirection(blue.getDirection());
         }
     }
 
