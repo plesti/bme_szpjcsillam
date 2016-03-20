@@ -9,12 +9,70 @@ public class Controller {
     private Player player;
     private Game game;
 
-    public Controller() throws IOException {
-        game = new Game();
+    public Controller() {
+        Application.printCall(this, "Controller()");
+
+        try {
+            game = new Game();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         player = new Player(game);
+        player.setPosition(new Point(2,2));
+    }
+
+    public void printmap() {
+        Point playerpos = player.getPosition();
+
+        for (int i = 0; i < game.maxsize; i++) {
+            String row = "";
+            Point point;
+            for (int k = 0; k < game.maxsize; k++) {
+                point = new Point(k, i);
+                CellInterface obj = game.getMapObject(point);
+
+                if (playerpos.equals(point)) {
+                    switch (player.getDirection()) {
+                        case UP:
+                            row += "^";
+                            break;
+                        case DOWN:
+                            row += "V";
+                            break;
+                        case LEFT:
+                            row += "<";
+                            break;
+                        case RIGHT:
+                            row += ">";
+                            break;
+                        default:
+                            row += "_";
+                            break;
+                    }
+                }
+                else if (game.isBox(point)) {
+                    row += "b";
+                }
+                else if (obj.getClass() == Wall.class) {
+                    row += "x";
+                }
+                else if (obj.getClass() == EmptyCell.class) {
+                    row += "0";
+                }
+                else if (obj.getClass() == PortalWall.class) {
+                    row += "p";
+                }
+                else {
+                    row += "u";
+                }
+            }
+            System.out.println(row);
+        }
     }
 
     public void openPortal(CellInterface.Color type) {
+        Application.printCall(this, String.format("openportal(%s)", type));
+
         CellInterface target = player.findTarget();
 
         if (target != null)
@@ -22,10 +80,20 @@ public class Controller {
     }
 
     public void dropBox() {
+        Application.printCall(this, "dropBox()");
+
+        System.out.println();
+
         player.setCarry(null);
     }
 
+    public Game getGame() {
+        return game;
+    }
+
     public void pickUpBox() {
+        Application.printCall(this, "pickUpBox()");
+
         Location.Direction dir = player.getDirection();
         Point frontpos = player.posInDirection(dir, 1);
 
@@ -38,6 +106,8 @@ public class Controller {
     }
 
     public void movePlayer(Location.Direction direction) {
+        Application.printCall(this, String.format("movePlayer(%s)", direction));
+
         Location.Direction playerDir = player.getDirection();
 
         if (playerDir == direction) {
@@ -46,50 +116,4 @@ public class Controller {
             player.turn(direction);
         }
     }
-
-//    public void goForward() {
-//        Location.Direction dir = player.getDirection();
-//
-//        Point frontpos = player.posInDirection(dir, 1);
-//        Point currentpos = player.getPosition();
-//        CellInterface frontcell = game.getMapObject(frontpos);
-//        CellInterface currentcell = game.getMapObject(currentpos);
-//
-//        boolean isstepable = frontcell.isStepable();
-//
-//        if (isstepable) {
-//            boolean iscarry = player.isCarry();
-//
-//            Box getbox = game.getBox(frontpos);
-//
-//            if (iscarry) {
-//                Point frontpos2 = player.posInDirection(dir, 2);
-//                CellInterface front2 = game.getMapObject(frontpos2);
-//
-//                Box getbox2 = game.getBox(frontpos2);
-//
-//                // Ha nincs elotte doboz es kettovel elotte ures
-//                if (front2.isStepable() && getbox2 == null) {
-//                    currentcell.onStepOut();
-//                    frontcell.onStepOut();
-//
-//                    // Player elore lep
-//                    player.setPosition(frontpos);
-//                    frontcell.onStepIn(player);
-//
-//                    // Azert kell mert lehet h portal-ba lep es akkor a doboznake ele kell kerulnie
-//                    Point newfront = player.posInDirection(dir, 1);
-//
-//                    Box box = player.getCarry();
-//                    box.setPosition(newfront);
-//                    front2.onStepIn(box);
-//                }
-//
-//            } else if (!iscarry && getbox == null) {
-//                currentcell.onStepOut();
-//                player.setPosition(frontpos);
-//                frontcell.onStepIn(player);
-//            }
-//        }
-//    }
 }

@@ -44,8 +44,10 @@ public class PortalWall extends Location implements CellInterface {
     public void shoot(Player player, Color color) {
         if (color == Color.BLUE) {
             blue = this;
+            System.out.println(String.format("Kekvagyok: %s,%s", getPosition().x, getPosition().y));
         } else {
             yellow = this;
+            System.out.println(String.format("Sargavagyok: %s,%s", getPosition().x, getPosition().y));
         }
 
         Direction pdir = player.getDirection();

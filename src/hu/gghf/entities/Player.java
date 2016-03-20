@@ -1,5 +1,6 @@
 package hu.gghf.entities;
 
+import hu.gghf.model.Application;
 import hu.gghf.model.Game;
 
 import java.awt.*;
@@ -14,33 +15,43 @@ public class Player extends Location {
 
     @Override
     public void destroy() {
-        System.out.println("Megoltel te csicska!!!!!");
+        Application.printCall(this, "destroy()");
     }
 
     public void setCarry(Box box) {
+        Application.printCall(this, "setCarry()");
+
         carryObject = box;
     }
     public Box getCarry() { return carryObject; }
     public boolean isCarry() { return carryObject != null; }
 
     public Point posInDirection(Direction direction, int distance) {
+        Application.printCall(this, "posInDirection()");
+
         Point pos = getPosition();
         int x = pos.x, y = pos.y;
 
         switch (direction) {
             case UP:
-                y += distance;
-            case DOWN:
                 y -= distance;
+                break;
+            case DOWN:
+                y += distance;
+                break;
             case LEFT:
                 x -= distance;
+                break;
             case RIGHT:
                 x += distance;
+                break;
         }
         return new Point(x, y);
     }
 
     public CellInterface findTarget() {
+        Application.printCall(this, "findTarget()");
+
         Direction dir = getDirection();
 
         CellInterface target;
@@ -59,6 +70,9 @@ public class Player extends Location {
     }
 
     public void goForward() {
+        Application.printCall(this, "goForward()");
+
+
         Location.Direction dir = getDirection();
 
         Point frontpos = posInDirection(dir, 1);
@@ -104,13 +118,15 @@ public class Player extends Location {
         }
     }
 
-    public void turn(Direction direction) {
+    public void turn(Direction newdir) {
+        Application.printCall(this, "turn()");
+
         boolean iscarry = isCarry();
 
         if (iscarry) {
             Direction dir = getDirection();
 
-            Point newpos = posInDirection(dir, 1);
+            Point newpos = posInDirection(newdir, 1);
             CellInterface newcell = game.getMapObject(newpos);
 
             Box box = getCarry();
@@ -120,15 +136,15 @@ public class Player extends Location {
             boolean isbox = game.isBox(newpos);
             boolean isstepable = newcell.isStepable();
 
-            if (isbox && isstepable) {
+            if (!isbox && isstepable) {
                 boxcell.onStepOut();
-                setDirection(direction);
+                setDirection(newdir);
                 box.setPosition(newpos);
                 newcell.onStepIn(box);
             }
 
         } else {
-            setDirection(direction);
+            setDirection(newdir);
         }
     }
 }
