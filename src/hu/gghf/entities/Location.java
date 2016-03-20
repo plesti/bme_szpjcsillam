@@ -3,6 +3,7 @@ package hu.gghf.entities;
 import hu.gghf.model.Application;
 
 import java.awt.*;
+import java.io.IOException;
 
 public abstract class Location {
     public enum Direction { UP, DOWN, LEFT, RIGHT }
@@ -29,8 +30,26 @@ public abstract class Location {
 
     public Direction getDirection() {
         Application.printCall(this, "getDirection()");
+//        return direction;
 
-        return direction;
+        try {
+            System.out.println("Melyik iranyba nez a jatekos? (1 - fel, 2 - le, 3 - jobbra, 4 - balra)");
+            int response = System.in.read();
+
+            switch (response) {
+                case 49:
+                    return Direction.UP;
+                case 50:
+                    return Direction.DOWN;
+                case 51:
+                    return Direction.RIGHT;
+                case 52:
+                    return Direction.LEFT;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Direction.UP;
     }
     public void setDirection(Direction direction) {
         Application.printCall(this, "setDirection()");
