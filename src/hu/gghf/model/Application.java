@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 
 public class Application {
     public static void main(String[] args) {
-        Controller controller = new Controller();
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -18,31 +17,43 @@ public class Application {
         while (!exit) {
             System.out.println("______________");
 //            controller.printmap();
-
+            Controller controller = null;
             try {
                 String s = br.readLine();
-                if (s.equals("u")) {
-                    controller.movePlayer(Location.Direction.UP);
-                } else if (s.equals("d")) {
-                    controller.movePlayer(Location.Direction.DOWN);
+                if (s.equals("start")) {
+                    controller = new Controller();
+                }
+                else if (s.equals("u")) {
+                    if (controller != null)
+                        controller.movePlayer(Location.Direction.UP);
+                }
+                else if (s.equals("d")) {
+                    if (controller != null)
+                        controller.movePlayer(Location.Direction.DOWN);
                 }
                 else if (s.equals("l")) {
-                    controller.movePlayer(Location.Direction.LEFT);
+                    if (controller != null)
+                        controller.movePlayer(Location.Direction.LEFT);
                 }
                 else if (s.equals("r")) {
-                    controller.movePlayer(Location.Direction.RIGHT);
+                    if (controller != null)
+                        controller.movePlayer(Location.Direction.RIGHT);
                 }
                 else if (s.equals("sb")) {
-                    controller.openPortal(CellInterface.Color.BLUE);
+                    if (controller != null)
+                        controller.openPortal(CellInterface.Color.BLUE);
                 }
                 else if (s.equals("sy")) {
-                    controller.openPortal(CellInterface.Color.YELLOW);
+                    if (controller != null)
+                        controller.openPortal(CellInterface.Color.YELLOW);
                 }
                 else if (s.equals("p")) {
-                    controller.pickUpBox();
+                    if (controller != null)
+                        controller.pickUpBox();
                 }
                 else if (s.equals("pd")) {
-                    controller.dropBox();
+                    if (controller != null)
+                        controller.dropBox();
                 }
                 else if (s.equals("q")) {
                     exit = true;
