@@ -1,25 +1,46 @@
 package hu.gghf.entities;
 
+import hu.gghf.model.Application;
+
 public class Door implements CellInterface {
     private boolean open = false;
 
-    public void setOpen(boolean isopen) { open = isopen; }
+    public void setOpen(boolean isopen) {
+        Application.printCall(this, "-->setOpen()");
+
+        open = isopen;
+        Application.printCall(this, "<--");
+    }
 
     @Override
     public boolean isStepable() {
+        Application.printCall(this, "-->isStepable()");
+
+        Application.printCall(this, "<--");
         return open;
     }
 
     @Override
-    public void onStepIn(Location object) { }
+    public void onStepIn(Location object) {
+        Application.printCall(this, "-->onStepIn()");
+        Application.printCall(this, "<--");
+    }
+    @Override
+    public void onStepOut() {
+        Application.printCall(this, "-->onStepOut()");
+        Application.printCall(this, "<--");
+    }
 
     @Override
-    public void onStepOut() { }
-
-    @Override
-    public boolean isShootable() { return !open; }
+    public boolean isShootable() {
+        Application.printCall(this, "-->isShootable()");
+        Application.printCall(this, "<--");
+        return !open;
+    }
 
     @Override
     public void shoot(Player player, Color color) {
+        Application.printCall(this, "-->shoot()");
+        Application.printCall(this, "<--");
     }
 }

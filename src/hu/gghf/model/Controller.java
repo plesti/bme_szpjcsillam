@@ -10,7 +10,7 @@ public class Controller {
     private Game game;
 
     public Controller() {
-        Application.printCall(this, "Controller()");
+        Application.printCall(this, "-->Controller()");
 
         try {
             game = new Game();
@@ -19,6 +19,8 @@ public class Controller {
         }
         player = new Player(game);
         player.setPosition(new Point(2,2));
+
+        Application.printCall(this, "<--");
     }
 
     public void printmap() {
@@ -71,28 +73,28 @@ public class Controller {
     }
 
     public void openPortal(CellInterface.Color type) {
-        Application.printCall(this, String.format("openportal(%s)", type));
+        Application.printCall(this, String.format("-->openportal(%s)", type));
 
         CellInterface target = player.findTarget();
 
         if (target != null)
             target.shoot(player, type);
+
+        Application.printCall(this, "<--");
     }
 
     public void dropBox() {
-        Application.printCall(this, "dropBox()");
+        Application.printCall(this, "-->dropBox()");
 
         System.out.println();
 
         player.setCarry(null);
-    }
+        Application.printCall(this, "<--");
 
-    public Game getGame() {
-        return game;
     }
 
     public void pickUpBox() {
-        Application.printCall(this, "pickUpBox()");
+        Application.printCall(this, "-->pickUpBox()");
 
         Location.Direction dir = player.getDirection();
         Point frontpos = player.posInDirection(dir, 1);
@@ -103,10 +105,11 @@ public class Controller {
             Box box = game.getBox(frontpos);
             player.setCarry(box);
         }
+        Application.printCall(this, "<--");
     }
 
     public void movePlayer(Location.Direction direction) {
-        Application.printCall(this, String.format("movePlayer(%s)", direction));
+        Application.printCall(this, String.format("-->movePlayer(%s)", direction));
 
         Location.Direction playerDir = player.getDirection();
 
@@ -115,5 +118,6 @@ public class Controller {
         } else {
             player.turn(direction);
         }
+        Application.printCall(this, "<--");
     }
 }

@@ -19,31 +19,72 @@ public class Game {
     // Ez majd a terkep merete
     public int maxsize = 6;
 
+    private void ZsoltiInit() throws IOException {
+        map = new CellInterface[maxsize][maxsize];
+        Application.printCall(this, "MAP()");
+        boxes = new ArrayList<Box>();
+        Application.printCall(this, "BOXES()");
+
+        BufferedReader nf = new BufferedReader(new FileReader("palya.csv"));
+        int i = 0;
+
+        String line;
+        while ((line = nf.readLine()) != null) {
+            String[] params = line.split(";");
+            for (int j = 0; j < maxsize; j++) {
+                Point p = new Point(j,i);
+                switch (params[j].charAt(0)) {
+                    case 'x':
+                        setMapObject(p, new Wall());
+                        break;
+                    case '0':
+                        setMapObject(p, new EmptyCell());
+                        break;
+                    case 'p':
+                        setMapObject(p, new PortalWall(p));
+                        break;
+                    case 'b':
+                        Box box = new Box();
+                        box.setPosition(p);
+                        addBox(box);
+                        setMapObject(p, new EmptyCell());
+                        break;
+                    default: break;
+                }
+            }
+            i++;
+        }
+        nf.close();
+    }
+
     public Game() throws IOException {
         Application.printCall(this, "Game()");
 
-        map = new CellInterface[maxsize][maxsize];
-        boxes = new ArrayList<Box>();
+//        map = new CellInterface[maxsize][maxsize];
+//        boxes = new ArrayList<Box>();
+//
+//        for (int i = 0; i < maxsize; i++) {
+//            for (int k = 0; k < maxsize; k++) {
+//                if (k == (maxsize-1) || k == 0 || i == (maxsize-1) || i == 0) {
+//                    map[i][k] = new Wall();
+//                } else {
+//                    map[i][k] = new EmptyCell();
+//                }
+//            }
+//        }
+//
+//        Point pw1 = new Point(1, 3);
+//        Point pw3 = new Point(4, 4);
+//        setMapObject(pw1, new PortalWall(pw1));
+//        setMapObject(pw3, new PortalWall(pw3));
+//
+//        Point pb1 = new Point(4, 3);
+//        Box box = new Box();
+//        box.setPosition(pb1);
+//        addBox(box);
 
-        for (int i = 0; i < maxsize; i++) {
-            for (int k = 0; k < maxsize; k++) {
-                if (k == (maxsize-1) || k == 0 || i == (maxsize-1) || i == 0) {
-                    map[i][k] = new Wall();
-                } else {
-                    map[i][k] = new EmptyCell();
-                }
-            }
-        }
-
-        Point pw1 = new Point(1, 3);
-        Point pw3 = new Point(4, 4);
-        setMapObject(pw1, new PortalWall(pw1));
-        setMapObject(pw3, new PortalWall(pw3));
-
-        Point pb1 = new Point(4, 3);
-        Box box = new Box();
-        box.setPosition(pb1);
-        addBox(box);
+//        TODO ez lesz a jo parser
+        ZsoltiInit();
 
 //        BufferedReader nf = new BufferedReader(new FileReader("katyvasz.txt"));
 //        map = new CellInterface[maxsize][maxsize];
@@ -70,49 +111,60 @@ public class Game {
     }
 
     public CellInterface getMapObject(Point point) {
-        Application.printCall(this, "getMapObject()");
+        Application.printCall(this, "-->getMapObject()");
 
-        return map[point.y][point.x];
+        // TODO: hely kod kikommentelve
+//        return map[point.y][point.x];
+        Application.printCall(this, "<--");
+        return Test.selected;
     }
     public void setMapObject(Point point, CellInterface cell) {
-        Application.printCall(this, "setMapObject()");
-
+        Application.printCall(this, "-->setMapObject()");
         map[point.y][point.x] = cell;
+        Application.printCall(this, "<--");
     }
 
     public boolean isBox(Point point) {
-        Application.printCall(this, "isBox()");
+        Application.printCall(this, "-->isBox()");
 
         for (Box b : boxes) {
-            if (b.getPosition().equals(point))
+            if (b.getPosition().equals(point)) {
+                Application.printCall(this, "<--");
                 return true;
+            }
         }
+        Application.printCall(this, "<--");
         return false;
     }
     public Box getBox(Point point) {
-        Application.printCall(this, "getBox()");
+        Application.printCall(this, "-->getBox()");
 
         for (Box b : boxes) {
-            if (b.getPosition().equals(point))
+            if (b.getPosition().equals(point)) {
+                Application.printCall(this, "<--");
                 return b;
+            }
         }
+        Application.printCall(this, "<--");
         return null;
     }
     public void addBox(Box box) {
-        Application.printCall(this, "addBox()");
+        Application.printCall(this, "-->addBox()");
 
         boxes.add(box);
+        Application.printCall(this, "<--");
+
     }
 
     public void addZPM() {
-        Application.printCall(this, "addZPM()");
-
+        Application.printCall(this, "-->addZPM()");
         zpm_counter += 1;
+        Application.printCall(this, "<--");
     }
 
     public int getZpmCount() {
-        Application.printCall(this, "getZpmCount()");
-
+        Application.printCall(this, "-->getZpmCount()");
+        Application.printCall(this, "<--");
         return zpm_counter;
     }
 }

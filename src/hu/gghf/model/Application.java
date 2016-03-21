@@ -3,32 +3,43 @@ package hu.gghf.model;
 import hu.gghf.entities.CellInterface;
 import hu.gghf.entities.Location;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Application {
-    public static void main(String[] args) {
+    private static boolean debug = false;
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
+        Controller controller = null;
+
 
         boolean exit = false;
         while (!exit) {
-            Controller controller = null;
-            System.out.println("Nyomd le az interakcionak megfelelo parancsot!");
+            System.out.println("_____________");
+            System.out.println("Add meg interakcionak megfelelo parancsot!");
+            System.out.println("Uj jatek (start)");
             System.out.println("Mozgas fel (u)");
             System.out.println("Mozgas Le (d)");
             System.out.println("Mozgas balra (l)");
             System.out.println("Mozgas jobbra (r)");
+            System.out.println("Doboz felemeles (p)");
+            System.out.println("Doboz letetel (pd)");
+            System.out.println("Kilepes (q)");
 
-//            controller.printmap();
+            debug = false;
+            Test.init();
 
+            if (controller != null) {
+//                controller.printmap();
+            }
+            debug = true;
+
+            System.out.println("_____________");
             try {
-                String s = br.readLine();
+                String s = Test.br.readLine();
                 if (s.equals("start")) {
                     controller = new Controller();
                 }
-                if (s.equals("u")) {
+                else if (s.equals("u")) {
                     if (controller != null) {
                         controller.movePlayer(Location.Direction.UP);
                     }
@@ -76,7 +87,21 @@ public class Application {
         }
     }
 
+    public static int levelcounter = 0;
     public static void printCall(Object obj, String msg) {
-        System.out.println(String.format("%s.%s", obj.getClass().getSimpleName(), msg));
+        if (debug) {
+            String output = String.format(" %s (%s)", msg, obj.getClass().getSimpleName());
+
+            if (msg.startsWith("<--")) {
+                levelcounter--;
+            }
+            for (int i = 0; i < levelcounter; i++) {
+                System.out.print("\t");
+            }
+            System.out.println(output);
+            if (msg.startsWith("-->")) {
+                levelcounter++;
+            }
+        }
     }
 }
