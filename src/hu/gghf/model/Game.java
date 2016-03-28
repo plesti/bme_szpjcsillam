@@ -12,24 +12,60 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 
+/* +class Game
+ * Standard osztály, ami a játéktér elemeit tartalmazza és közvetlen vezérlésükre képes.
+ * Ezek közé tartozik: pályaelem elhelyezése, mozgatása, lekérdezése.
+ * Vezérlõfüggvényei kívülrõl hívódnak meg, rendszerint az Application osztályból.
+ */
 public class Game {
+	/*  Attribútumlista:
+	 *  -zpm_counter: tárolja a már megszerzett ZPM-modulok számát.
+	 *  -map: 2 dimenziós tömb, a pályán található rögzített pályaelemeket tárolja.
+	 *        Az egyes elemek helyzetét tömbkoordinátájával azonosítjuk.
+	 *  -boxes: dinamikus tömb dobozok tárolására.
+	 *  +maxsize: segédkonstans, ami lefixálja a pálya maximális méretét. A pályabeolvasást
+	 *  		  segíti a feltöltõ Game() metódusnál. 
+	 */ 
     private static int zpm_counter = 0;
     private CellInterface[][] map;
     private ArrayList<Box> boxes;
-    // Ez majd a terkep merete
-    public int maxsize = 6;
+    public final int maxsize = 6;
+    
+    /*  #Game(): konstruktor. Példányosítja a tömbattribútumokat, majd feltölti adatokkal,
+     * 			 a palya.csv fájl soronkénti kiolvasásával. A fájlt egy FileReaderen, azon
+     * 			 túl is egy BufferedReaderen keresztül olvassa be. 
+     */
 
-    private void ZsoltiInit() throws IOException {
+    public Game() throws IOException {
+    	Application.printCall(this, "Game()");
         map = new CellInterface[maxsize][maxsize];
         Application.printCall(this, "MAP()");
         boxes = new ArrayList<Box>();
         Application.printCall(this, "BOXES()");
 
         BufferedReader nf = new BufferedReader(new FileReader("palya.csv"));
-        int i = 0;
+       
+        int i = 0; 
+        //görgetve növelt ciklusváltozó, ami egyben az elem sorkoordinátája is.
 
-        String line;
-        while ((line = nf.readLine()) != null) {
+        String line; 
+        //szöveges változó egy pályasor tárolásához.
+        
+        /*  Fájlbeolvasás rutinja:
+         *  - egy sort beolvasunk a line változóba;
+         *  - a beolvasott sort határolók mentén széttördeljük elemekre;
+         *  - egy oszlopváltozót folyamosan iterálva a maximum méretig,
+         *    megvizsgáljuk a tömbelem elsõ karakterét.
+         *  - az elsõ karakter értékétõl függõen:
+         *     - ha 'x': falat olvastunk be;
+         *     - ha '0': üres padlólapot olvastunk be;
+         *     - ha 'p': portálfalat olvastunk be;
+         *     - ha 'b': dobozt olvastunk be.
+         *  - a rögzített pályaelemeket betesszük a map-ba. Doboz esetében 
+         *    (mivel nem önállóan pályaelem), egy üres lapot teszünk be,
+         *    miközben magát a dobozt is regisztráljuk a dobozok tömbjében.
+         */
+        while (((line = nf.readLine()) != null) || (i != maxsize)) {
             String[] params = line.split(";");
             for (int j = 0; j < maxsize; j++) {
                 Point p = new Point(j,i);
@@ -56,60 +92,12 @@ public class Game {
         }
         nf.close();
     }
-
-    public Game() throws IOException {
-        Application.printCall(this, "Game()");
-
-//        map = new CellInterface[maxsize][maxsize];
-//        boxes = new ArrayList<Box>();
-//
-//        for (int i = 0; i < maxsize; i++) {
-//            for (int k = 0; k < maxsize; k++) {
-//                if (k == (maxsize-1) || k == 0 || i == (maxsize-1) || i == 0) {
-//                    map[i][k] = new Wall();
-//                } else {
-//                    map[i][k] = new EmptyCell();
-//                }
-//            }
-//        }
-//
-//        Point pw1 = new Point(1, 3);
-//        Point pw3 = new Point(4, 4);
-//        setMapObject(pw1, new PortalWall(pw1));
-//        setMapObject(pw3, new PortalWall(pw3));
-//
-//        Point pb1 = new Point(4, 3);
-//        Box box = new Box();
-//        box.setPosition(pb1);
-//        addBox(box);
-
-//        TODO ez lesz a jo parser
-        ZsoltiInit();
-
-//        BufferedReader nf = new BufferedReader(new FileReader("katyvasz.txt"));
-//        map = new CellInterface[maxsize][maxsize];
-//        this.boxes = new ArrayList<Box>();
-//        int y = 0;
-//        String line;
-//        while ((line = nf.readLine()) != null) {
-//        	String[] params = line.split(";");
-//        	int paramslength = params.length;
-//        	for (int i = 0; i<paramslength; i++) {
-//        		char c = params[i].charAt(0);
-//        		switch (c) {
-//        		case '0':
-//        			this.setMapObject(new Point(y,i), new EmptyCell());
-//        			break;
-//        		case '1':
-//        			this.addBox(new Box());
-//        			break;
-//        		default:
-//        			break;
-//        		}
-//        	}
-//        }
-    }
-
+    
+    /*  +getMapObject(Point): getter függvény. Lekérdezi a térkép egy adott pontján lévõ elem
+     * 					 	  típusát.
+     *  @param point: a lekérdezni kívánt pont koordinátapárja.
+     *  @return CellInterface: a lekérdezett pont típusa.  
+     */
     public CellInterface getMapObject(Point point) {
         Application.printCall(this, "-->getMapObject()");
 
@@ -118,15 +106,27 @@ public class Game {
         Application.printCall(this, "<--");
         return Test.selected;
     }
+    
+    /*  +setMapObject(Point,CellInterface): setter függvény. Elhelyez a térkép egy megadott pontján egy
+     * 					 					tetszõleges rögzített pályaelemet.
+     *  @param point: a módosítandó pont koordinátapárja.
+     *  @param cell: az elhelyezendõ pályaelem típusa.
+     */
     public void setMapObject(Point point, CellInterface cell) {
         Application.printCall(this, "-->setMapObject()");
         map[point.y][point.x] = cell;
         Application.printCall(this, "<--");
     }
+    
+    /*  +isBox(Point): getter függvény. Megnézi, hogy a térkép egy adott pontján doboz áll -e.
+     *  @param point: a lekérdezni kívánt pont koordinátapárja.
+     *  @return boolean: igaz, ha doboz áll a lekérdezett ponton, egyébként hamis.
+     */
 
     public boolean isBox(Point point) {
         Application.printCall(this, "-->isBox()");
-
+        
+        //A dobozok listáján végig kell mennünk, hogy kiderüljön, van -e ilyen doboz.
         for (Box b : boxes) {
             if (b.getPosition().equals(point)) {
                 Application.printCall(this, "<--");
@@ -136,6 +136,12 @@ public class Game {
         Application.printCall(this, "<--");
         return false;
     }
+    
+    /*  +getBox(Point): getter függvény. Lekérdezi és visszaadja a pálya megadott pontján lévõ doboz referenciáját.
+     * 		            Hasonlít isBox-hoz, viszont itt a visszatérés referencia.
+     *  @param point: a lekérdezni kívánt pont koordinátapárja.
+     *  @return Box: a megtalált doboz referenciája. Ha nincs doboz, akkor null.
+     */
     public Box getBox(Point point) {
         Application.printCall(this, "-->getBox()");
 
@@ -148,20 +154,28 @@ public class Game {
         Application.printCall(this, "<--");
         return null;
     }
+    
+    /*  +addBox(Box): hozzáad egy tetszõleges dobozt a dobozok listájához.
+     *  @param box: a hozzáadandó doboz referenciája.
+     */
     public void addBox(Box box) {
         Application.printCall(this, "-->addBox()");
 
         boxes.add(box);
         Application.printCall(this, "<--");
-
     }
-
+    
+    /*  +addZPM(Box): növeli a megtalált ZPM-ek számát 1-gyel.
+     */    
     public void addZPM() {
         Application.printCall(this, "-->addZPM()");
         zpm_counter += 1;
         Application.printCall(this, "<--");
     }
-
+    
+    /*  +getZpmCount(): lekérdezi a játékosnál lévõ ZPM-ek számát.
+     *  @return int: a játékos ZPM-jeinek száma.
+     */
     public int getZpmCount() {
         Application.printCall(this, "-->getZpmCount()");
         Application.printCall(this, "<--");
