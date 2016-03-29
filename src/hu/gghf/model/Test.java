@@ -21,6 +21,7 @@ public class Test {
     public static EmptyCell empty;
     public static Hole hole;
     public static PressurePlate pressurePlate;
+    public static PortalWall portalWall;
     public static Door door;
     
     //Az aktuális pályaelem egy referenciája, ami meghivatkozható.
@@ -43,6 +44,7 @@ public class Test {
         empty = new EmptyCell();
         hole = new Hole();
         pressurePlate = new PressurePlate(door);
+        portalWall = new PortalWall(new Point(1,2));
         door = new Door();
 
         carryBox = new Box();
@@ -55,7 +57,7 @@ public class Test {
      * 						   alább látható a beolvasás formátuma.
     */
     public static void setSelected() {
-        System.out.println("(1 - Ures mezo, 2 - Fal, 3 - Nyomolap, 4 - Szakadék)");
+        System.out.println("(1 - Ures mezo, 2 - Fal, 3 - Nyomolap, 4 - Szakadék, 5 - Portal)");
         try {
             String c = br.readLine();
             if (c.equals("1")) {
@@ -69,6 +71,9 @@ public class Test {
             }
             else if (c.equals("4")) {
                 Test.selected = Test.hole;
+            }
+            else if (c.equals("5")) {
+                Test.selected = Test.portalWall;
             }
             else {
                 setSelected();

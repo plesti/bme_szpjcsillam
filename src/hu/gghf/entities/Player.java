@@ -54,9 +54,7 @@ public class Player extends Location {
 	 */
     public Box getCarry() {
         Application.printCall(this, "-->getCarry()");
-//        return carryObject;
 
-//        TODO: TOROLNI
         Application.printCall(this, "<--");
         return Test.carryBox;
     }
@@ -66,9 +64,7 @@ public class Player extends Location {
 	 */
     public boolean isCarry() {
         Application.printCall(this, "-->isCarry()");
-//        return carryObject != null;
 
-//        TODO: TOROLNI
         Application.printCall(this, "<--");
         return Test.iscarry;
     }
@@ -121,6 +117,9 @@ public class Player extends Location {
          */ 
         for (int i = 1; i < 8; i++) {
             Point pos = posInDirection(dir, i);
+
+            System.out.println(String.format("?Milyen objektum legyen a jatekos elott %s tavolsagban?", i));
+            Test.setSelected();
             target = game.getMapObject(pos);
 
             boolean isshootable = target.isShootable();
@@ -144,16 +143,12 @@ public class Player extends Location {
         Point frontpos = posInDirection(dir, 1);
         Point currentpos = getPosition();
 
-//        TODO: KITOROLNI PROTOBAN
         //Fontos, hogy milyen objektum van a játékos elõtt.
         System.out.println("?Milyen objektum legyen a jatekos elott?");
         Test.setSelected();
-
         CellInterface frontcell = game.getMapObject(frontpos);
 
-        // TODO: ez is debug kod->TOROLNI! ures mezot adjon vissza a getMapObject
         Test.selected = Test.empty;
-
         CellInterface currentcell = game.getMapObject(currentpos);
 
         boolean isstepable = frontcell.isStepable();
@@ -169,22 +164,21 @@ public class Player extends Location {
          */
         
         if (isstepable) {
-
-            // TODO: Torolni! A teszt resze
             Test.setIscarry();
-
             boolean iscarry = isCarry();
 
+            System.out.println("?Adjunk referenciat az elottunk levo dobozrol (nem eseten null)?");
             Box getbox = game.getBox(frontpos);
 
             if (iscarry) {
                 Point frontpos2 = posInDirection(dir, 2);
 
-                // TODO: Torolni! A teszt resze
                 System.out.println("?Milyen objektum legyen a kettovel jatekos elott?");
                 Test.setSelected();
 
                 CellInterface frontcell2 = game.getMapObject(frontpos2);
+
+                System.out.println("?Adjunk referenciat az kettovel elottunk levo dobozrol (nem eseten null)?");
                 Box getbox2 = game.getBox(frontpos2);
 
                 // Ha nincs elõtte doboz és kettõvel elõtte üres:
@@ -220,7 +214,6 @@ public class Player extends Location {
     public void turn(Direction newdir) {
         Application.printCall(this, "-->turn()");
 
-        // TODO: Torolni! A teszt resze
         System.out.println("?Visz a jatekos dobozt?\ni/n");
         boolean iscarry = false;
         try {
@@ -228,7 +221,7 @@ public class Player extends Location {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//      boolean iscarry = isCarry();
+
         /* A játékosnál fontos, hogy ha visz dobozt, akkor azzal
          * együtt el tudjon fordulni. Emiatt számít, hogy a forgás
          * irányában milyen objektum helyezkedik el, mert nyilván
@@ -237,11 +230,8 @@ public class Player extends Location {
          * onStepIn és onStepOut függvényeket is.
          */
         if (iscarry) {
-            // TODO itt volt egy getDirection ami nem kell
-
             Point newpos = posInDirection(newdir, 1);
 
-            // TODO: torolni
             System.out.println("?Milyen objektum legyen a doboz jovobeli helyen?");
             Test.setSelected();
 
@@ -249,11 +239,11 @@ public class Player extends Location {
             Box box = getCarry();
             Point boxpos = box.getPosition();
 
-            // TODO: ez is debug kod->TOROLNI! ures mezot adjon vissza a getMapObject
             Test.selected = Test.empty;
 
             CellInterface boxcell = game.getMapObject(boxpos);
 
+            System.out.println("?Van doboz a cipelt doboz uj helyen?");
             boolean isbox = game.isBox(newpos);
             boolean isstepable = newcell.isStepable();
 

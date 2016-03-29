@@ -1,7 +1,10 @@
 package hu.gghf.entities;
 
 import hu.gghf.model.Application;
+import hu.gghf.model.Test;
+
 import java.awt.*;
+import java.io.IOException;
 
 /*  +class PortalWall : CellInterface, Location 
  *  Portálfal pályaelem megvalósítása. A portálfal egy speciális
@@ -33,12 +36,13 @@ public class PortalWall extends Location implements CellInterface {
     public boolean isStepable() {
         Application.printCall(this, "-->isStepable()");
 
-        if (blue == this && yellow != null) {
+        try {
+            System.out.println("?Nyitva van a portal? i/n");
+            boolean ret = (Test.br.readLine().equals("i"));
             Application.printCall(this, "<--");
-            return true;
-        } else if (yellow == this && blue != null) {
-            Application.printCall(this, "<--");
-            return true;
+            return ret;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         Application.printCall(this, "<--");
         return false;
@@ -53,13 +57,9 @@ public class PortalWall extends Location implements CellInterface {
     public void onStepIn(Location object) {
         Application.printCall(this, "-->onStepIn()");
 
-        if (blue == this && yellow != null) {
-            object.setPosition(yellow.getPosition());
-            object.setDirection(yellow.getDirection());
-        } else if (yellow == this && blue != null) {
-            object.setPosition(blue.getPosition());
-            object.setDirection(blue.getDirection());
-        }
+        object.setPosition(Test.portalWall.getPosition());
+        object.setDirection(Test.portalWall.getDirection());
+
         Application.printCall(this, "<--");
     }
     /*  +onStepOut(): felüldefiniált függvény, a portálból kilépés kezelésére.
@@ -96,11 +96,9 @@ public class PortalWall extends Location implements CellInterface {
         if (color == Color.BLUE) {
             blue = this;
             System.out.println("Kekvagyok");
-//            System.out.println(String.format("Kekvagyok: %s,%s", getPosition().x, getPosition().y));
         } else {
             yellow = this;
             System.out.println("Sargavagyok");
-//            System.out.println(String.format("Sargavagyok: %s,%s", getPosition().x, getPosition().y));
         }
 
         Direction pdir = player.getDirection();

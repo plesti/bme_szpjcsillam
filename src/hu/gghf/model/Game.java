@@ -4,11 +4,8 @@ import hu.gghf.entities.*;
 
 import java.awt.*;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -101,8 +98,6 @@ public class Game {
     public CellInterface getMapObject(Point point) {
         Application.printCall(this, "-->getMapObject()");
 
-        // TODO: hely kod kikommentelve
-//        return map[point.y][point.x];
         Application.printCall(this, "<--");
         return Test.selected;
     }
@@ -113,28 +108,28 @@ public class Game {
      *  @param cell: az elhelyezendõ pályaelem típusa.
      */
     public void setMapObject(Point point, CellInterface cell) {
-        Application.printCall(this, "-->setMapObject()");
+        Application.printCall(this, String.format("-->setMapObject(%s,%s)", point, cell.getClass().getSimpleName()));
         map[point.y][point.x] = cell;
         Application.printCall(this, "<--");
     }
     
     /*  +isBox(Point): getter függvény. Megnézi, hogy a térkép egy adott pontján doboz áll -e.
+     *  A szkeletonban nem jarja be a dobozokat, mert a doboz a valasz alapjan adodik vissza.
      *  @param point: a lekérdezni kívánt pont koordinátapárja.
      *  @return boolean: igaz, ha doboz áll a lekérdezett ponton, egyébként hamis.
      */
-
     public boolean isBox(Point point) {
-        Application.printCall(this, "-->isBox()");
-        
-        //A dobozok listáján végig kell mennünk, hogy kiderüljön, van -e ilyen doboz.
-        for (Box b : boxes) {
-            if (b.getPosition().equals(point)) {
-                Application.printCall(this, "<--");
-                return true;
-            }
+        System.out.println("i/n");
+        boolean ret = false;
+        try {
+            ret = (Test.br.readLine().equals("i"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        Application.printCall(this, "-->isBox()");
+        Test.carryBox.getPosition();
         Application.printCall(this, "<--");
-        return false;
+        return ret;
     }
     
     /*  +getBox(Point): getter függvény. Lekérdezi és visszaadja a pálya megadott pontján lévõ doboz referenciáját.
@@ -143,13 +138,19 @@ public class Game {
      *  @return Box: a megtalált doboz referenciája. Ha nincs doboz, akkor null.
      */
     public Box getBox(Point point) {
-        Application.printCall(this, "-->getBox()");
+        System.out.println("i/n");
+        boolean ih = false;
+        try {
+            ih = Test.br.readLine().equals("i");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        for (Box b : boxes) {
-            if (b.getPosition().equals(point)) {
-                Application.printCall(this, "<--");
-                return b;
-            }
+        Application.printCall(this, "-->getBox()");
+        if (ih) {
+            Test.carryBox.getPosition();
+            Application.printCall(this, "<--");
+            return Test.carryBox;
         }
         Application.printCall(this, "<--");
         return null;

@@ -34,71 +34,6 @@ public class Controller {
 
         Application.printCall(this, "<--");
     }
-    
-    /*  +printmap(): segédfüggvény, ami kirajzolja a játékteret. Célja az
-     * 				 önellenõrzés, amivel a tesztelõ és a felhasználó is
-     * 				 részletes képet kaphat a játéktér állapotáról.
-     */
-    public void printmap() {
-        Point playerpos = player.getPosition();
-    /*  A beolvasás menete:
-     *  - végigmegyünk a játéktér összes elemén két ciklussal, és sorban lekérdezzük
-     *    az adott helyen álló objektumokat.
-     *  - egy "sor" karakterfüzérbe folyamatosan addjuk hozzá a beolvasott elemeket, majd
-     *    az egész sort kiíratjuk minden sorvéggel.
-     *  - az egyes beolvasott objektumok jelölése:
-     *     '^','V','>','<': a játékos (négy irányba);
-     *     '0': üres járólap;
-     *     'x': fal;
-     *     'b': doboz;
-     *     'p': portálfal;
-     *     'u': egyéb, ismeretlen objektum.
-     */
-        for (int i = 0; i < game.maxsize; i++) {
-            String row = "";
-            Point point;
-            for (int k = 0; k < game.maxsize; k++) {
-                point = new Point(k, i);
-                CellInterface obj = game.getMapObject(point);
-
-                if (playerpos.equals(point)) {
-                    switch (player.getDirection()) {
-                        case UP:
-                            row += "^";
-                            break;
-                        case DOWN:
-                            row += "V";
-                            break;
-                        case LEFT:
-                            row += "<";
-                            break;
-                        case RIGHT:
-                            row += ">";
-                            break;
-                        default:
-                            row += "_";
-                            break;
-                    }
-                }
-                else if (game.isBox(point)) {
-                    row += "b";
-                }
-                else if (obj.getClass() == Wall.class) {
-                    row += "x";
-                }
-                else if (obj.getClass() == EmptyCell.class) {
-                    row += "0";
-                }
-                else if (obj.getClass() == PortalWall.class) {
-                    row += "p";
-                }
-                else {
-                    row += "u";
-                }
-            }
-            System.out.println(row);
-        }
-    }
 
     /*  +openPortal(CellInterface.Color): kilõ egy portállövedéket megadott színnel, a játékos irányából.
      * 									  Megkeresi a landolás helyét, majd az ott lévõ objektum "lövés"-
@@ -121,10 +56,8 @@ public class Controller {
      */
     public void dropBox() {
         Application.printCall(this, "-->dropBox()");
-        System.out.println();
         player.setCarry(null);
         Application.printCall(this, "<--");
-
     }
 
     /*  +pickUpBox(): megnézi, milyen tárgy van a játékos elõtt, majd felveszi,
@@ -136,9 +69,11 @@ public class Controller {
         Location.Direction dir = player.getDirection();
         Point frontpos = player.posInDirection(dir, 1);
 
+        System.out.println("?Van elottunk doboz?");
         boolean isbox = game.isBox(frontpos);
 
         if (isbox) {
+            System.out.println("?Adjunk referenciat az elottunk levo dobozrol (nem eseten null)?");
             Box box = game.getBox(frontpos);
             player.setCarry(box);
         }

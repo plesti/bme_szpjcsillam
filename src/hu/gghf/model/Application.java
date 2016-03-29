@@ -48,6 +48,8 @@ public class Application {
             System.out.println("Mozgas jobbra (r)");
             System.out.println("Doboz felemeles (p)");
             System.out.println("Doboz letetel (pd)");
+            System.out.println("Portal loves Kek (sb)");
+            System.out.println("Portal loves Kek (sy)");
             System.out.println("Kilepes (q)");
         
             debug = false;

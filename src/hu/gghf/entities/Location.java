@@ -58,9 +58,7 @@ public abstract class Location {
      */
     public Direction getDirection() {
         Application.printCall(this, "-->getDirection()");
-//        return direction;
 
-        // TODO: TOROLNI
         if (Test.playerdir == null)
             Test.setPlayerDir();
         Application.printCall(this, "<--");
