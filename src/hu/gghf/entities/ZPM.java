@@ -1,13 +1,12 @@
 package hu.gghf.entities;
 
-import hu.gghf.model.Game;
+import hu.gghf.interfaces.CellInterface;
+import hu.gghf.interfaces.Moveable;
 
 public class ZPM implements CellInterface {
     private boolean discovered = false;
-    private Game game;
 
-    public ZPM(Game game) {
-        this.game = game;
+    public ZPM() {
     }
 
     @Override
@@ -16,9 +15,10 @@ public class ZPM implements CellInterface {
     }
 
     @Override
-    public void onStepIn(Location obj) {
+    public void onStepIn(Moveable obj) {
         if (!discovered) {
-            game.addZPM();
+            // TODO: events? addZPM?
+//            game.addZPM();
             discovered = true;
         }
     }
@@ -33,7 +33,7 @@ public class ZPM implements CellInterface {
     }
 
     @Override
-    public void shoot(Player player, Color color) {
+    public void shot(Player player, Color color) {
 
     }
 }

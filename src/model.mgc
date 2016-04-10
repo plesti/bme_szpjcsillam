@@ -8,7 +8,7 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
-        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+        <Extension destinationClassName="hu.gghf.interfaces.CellInterface"/>
         <Association destinationClassName="hu.gghf.model.Game"
             endpointName="game" kind="Simple"/>
         <Communication destinationClassName="hu.gghf.model.Game"/>
@@ -21,12 +21,12 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
-        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+        <Extension destinationClassName="hu.gghf.interfaces.CellInterface"/>
         <Association destinationClassName="hu.gghf.model.Game"
             endpointName="game" kind="Simple"/>
         <Communication destinationClassName="hu.gghf.model.Game"/>
     </Class>
-    <Class name="hu.gghf.entities.Location" x="188" y="351">
+    <Class name="hu.gghf.interfaces.Location" x="188" y="351">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -35,7 +35,7 @@
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
     </Class>
-    <Class name="hu.gghf.entities.CellInterface" x="250" y="186">
+    <Class name="hu.gghf.interfaces.CellInterface" x="250" y="186">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -44,7 +44,7 @@
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
     </Class>
-    <Class name="hu.gghf.entities.Location.Direction" x="563" y="481">
+    <Class name="hu.gghf.interfaces.Location.Direction" x="563" y="481">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -61,7 +61,7 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
-        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+        <Extension destinationClassName="hu.gghf.interfaces.CellInterface"/>
     </Class>
     <Class name="hu.gghf.entities.Player" x="304" y="466">
         <AttributesDisplayFilter public-accepted="true"
@@ -71,7 +71,7 @@
             private-accepted="true" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
-        <Extension destinationClassName="hu.gghf.entities.Location"/>
+        <Extension destinationClassName="hu.gghf.interfaces.Location"/>
         <Association destinationClassName="hu.gghf.entities.Box"
             endpointName="carryObject" kind="Simple"/>
     </Class>
@@ -97,8 +97,8 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
-        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
-        <Communication destinationClassName="hu.gghf.entities.Location"/>
+        <Extension destinationClassName="hu.gghf.interfaces.CellInterface"/>
+        <Communication destinationClassName="hu.gghf.interfaces.Location"/>
     </Class>
     <Class name="hu.gghf.entities.PortalWall" x="19" y="507">
         <AttributesDisplayFilter public-accepted="true"
@@ -108,9 +108,9 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
-        <Extension destinationClassName="hu.gghf.entities.Location"/>
-        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
-        <Communication destinationClassName="hu.gghf.entities.Location"/>
+        <Extension destinationClassName="hu.gghf.interfaces.Location"/>
+        <Extension destinationClassName="hu.gghf.interfaces.CellInterface"/>
+        <Communication destinationClassName="hu.gghf.interfaces.Location"/>
     </Class>
     <Class name="hu.gghf.entities.Box" x="439" y="464">
         <AttributesDisplayFilter public-accepted="true"
@@ -120,7 +120,7 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
-        <Extension destinationClassName="hu.gghf.entities.Location"/>
+        <Extension destinationClassName="hu.gghf.interfaces.Location"/>
     </Class>
     <Class name="hu.gghf.entities.PressurePlate" x="225" y="18">
         <AttributesDisplayFilter public-accepted="true"
@@ -130,12 +130,12 @@
             private-accepted="true" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
-        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+        <Extension destinationClassName="hu.gghf.interfaces.CellInterface"/>
         <Association destinationClassName="hu.gghf.entities.Door"
             endpointName="door" kind="Simple"/>
         <Communication destinationClassName="hu.gghf.entities.Door"/>
     </Class>
-    <Class name="hu.gghf.entities.CellInterface.Color" x="641" y="490">
+    <Class name="hu.gghf.interfaces.CellInterface.Color" x="641" y="490">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -152,7 +152,7 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
-        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+        <Extension destinationClassName="hu.gghf.interfaces.CellInterface"/>
     </Class>
     <Class name="hu.gghf.entities.EmptyCell" x="531" y="360">
         <AttributesDisplayFilter public-accepted="true"
@@ -162,6 +162,6 @@
             private-accepted="false" protected-accepted="false"
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
-        <Extension destinationClassName="hu.gghf.entities.CellInterface"/>
+        <Extension destinationClassName="hu.gghf.interfaces.CellInterface"/>
     </Class>
 </ClassDiagram>

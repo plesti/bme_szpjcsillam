@@ -1,11 +1,9 @@
 package hu.gghf.entities;
 
-import hu.gghf.model.Game;
+import hu.gghf.interfaces.CellInterface;
+import hu.gghf.interfaces.Moveable;
 public class ShieldGenerator implements CellInterface {
-    Game game;
-
-    public ShieldGenerator(Game game) {
-        this.game = game;
+    public ShieldGenerator() {
     }
 
     @Override
@@ -14,10 +12,8 @@ public class ShieldGenerator implements CellInterface {
     }
 
     @Override
-    public void onStepIn(Location object) {
-        if (game.getZpmCount() == 4) {
-            System.out.println("Nyertel!");
-        }
+    public void onStepIn(Moveable object) {
+        // TODO: jatekvege?
     }
 
     @Override
@@ -30,6 +26,6 @@ public class ShieldGenerator implements CellInterface {
     }
 
     @Override
-    public void shoot(Player player, Color color) {
+    public void shot(Player player, Color color) {
     }
 }

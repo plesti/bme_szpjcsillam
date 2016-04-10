@@ -1,34 +1,69 @@
 package hu.gghf.entities;
 
+import hu.gghf.interfaces.CellInterface;
+import hu.gghf.interfaces.Controllable;
+import hu.gghf.interfaces.Moveable;
+import hu.gghf.interfaces.Shootable;
 import hu.gghf.model.Application;
-import hu.gghf.model.Game;
+import hu.gghf.model.Map;
 
 import java.awt.*;
 
-public class Player extends Location {
+public class Player extends Moveable implements Controllable {
     private Box carryObject;
-    private Game game;
+    protected Map map;
 
-    public Player(Game game) {
-        this.game = game;
+    public Player(Map map) {
+        this.map = map;
+    }
+
+    @Override
+    public void move(Direction direction) {
+        if (this.direction == direction) {
+            goForward();
+        } else {
+            turn(direction);
+        }
+    }
+
+    @Override
+    public void shoot(CellInterface.Color type) {
+        Shootable target = findTarget();
+
+        if (target != null)
+            target.shot(this, type);
     }
 
     @Override
     public void destroy() {
-        Application.printCall(this, "destroy()");
+        // TODO
+        Application.printCall(this, "Meghaltam");
+    }
+
+    @Override
+    public float getWeight() {
+        return 1.0f;
+    }
+
+    public void pickUpBox() {
+        Point frontpos = posInDirection(this.direction, 1);
+
+        Box box = map.getBox(frontpos);
+        if (box != null) {
+            setCarry(box);
+        }
+    }
+
+    public void dropBox() {
+        setCarry(null);
     }
 
     public void setCarry(Box box) {
-        Application.printCall(this, "setCarry()");
-
         carryObject = box;
     }
     public Box getCarry() { return carryObject; }
-    public boolean isCarry() { return carryObject != null; }
 
     public Point posInDirection(Direction direction, int distance) {
-        Application.printCall(this, "posInDirection()");
-
         Point pos = getPosition();
         int x = pos.x, y = pos.y;
 
@@ -49,52 +84,32 @@ public class Player extends Location {
         return new Point(x, y);
     }
 
-    public CellInterface findTarget() {
-        Application.printCall(this, "findTarget()");
+    private Shootable findTarget() {
+        Shootable target = null;
 
-        Direction dir = getDirection();
-
-        CellInterface target;
-
-        // 8 egyseg tavolra lehet loni
         for (int i = 1; i < 8; i++) {
-            Point pos = posInDirection(dir, i);
-            target = game.getMapObject(pos);
+            target = map.getMapObject(posInDirection(this.direction, i));
 
-            boolean isshootable = target.isShootable();
-            if (isshootable) {
+            if (target.isShootable()) {
                 return target;
             }
         }
         return null;
     }
 
-    public void goForward() {
-        Application.printCall(this, "goForward()");
+    private void goForward() {
+        Point frontpos = posInDirection(this.direction, 1);
+        CellInterface frontcell = map.getMapObject(frontpos);
+        CellInterface currentcell = map.getMapObject(this.position);
 
+        if (frontcell.isStepable()) {
+            Box getbox = map.getBox(frontpos);
 
-        Location.Direction dir = getDirection();
+            if (carryObject != null) {
+                Point frontpos2 = posInDirection(this.direction, 2);
+                CellInterface frontcell2 = map.getMapObject(frontpos2);
 
-        Point frontpos = posInDirection(dir, 1);
-        Point currentpos = getPosition();
-        CellInterface frontcell = game.getMapObject(frontpos);
-        CellInterface currentcell = game.getMapObject(currentpos);
-
-        boolean isstepable = frontcell.isStepable();
-
-        if (isstepable) {
-            boolean iscarry = isCarry();
-
-            Box getbox = game.getBox(frontpos);
-
-            if (iscarry) {
-                Point frontpos2 = posInDirection(dir, 2);
-                CellInterface frontcell2 = game.getMapObject(frontpos2);
-
-                Box getbox2 = game.getBox(frontpos2);
-
-                // Ha nincs elotte doboz es kettovel elotte ures
-                if (frontcell2.isStepable() && getbox2 == null) {
+                if (frontcell2.isStepable()) {
                     currentcell.onStepOut();
                     frontcell.onStepOut();
 
@@ -103,14 +118,14 @@ public class Player extends Location {
                     frontcell.onStepIn(this);
 
                     // Azert kell mert lehet h portal-ba lep es akkor a doboznake ele kell kerulnie
-                    Point newfront = posInDirection(dir, 1);
+                    Point newfront = posInDirection(this.direction, 1);
 
                     Box box = getCarry();
                     box.setPosition(newfront);
                     frontcell2.onStepIn(box);
                 }
 
-            } else if (!iscarry && getbox == null) {
+            } else if (getbox == null) {
                 currentcell.onStepOut();
                 setPosition(frontpos);
                 frontcell.onStepIn(this);
@@ -118,31 +133,21 @@ public class Player extends Location {
         }
     }
 
-    public void turn(Direction newdir) {
-        Application.printCall(this, "turn()");
-
-        boolean iscarry = isCarry();
-
-        if (iscarry) {
-            Direction dir = getDirection();
-
+    private void turn(Direction newdir) {
+        if (carryObject != null) {
             Point newpos = posInDirection(newdir, 1);
-            CellInterface newcell = game.getMapObject(newpos);
+            CellInterface newcell = map.getMapObject(newpos);
 
-            Box box = getCarry();
-            Point boxpos = box.getPosition();
-            CellInterface boxcell = game.getMapObject(boxpos);
+            if (newcell.isStepable()) {
+                Box box = getCarry();
+                Point boxpos = box.getPosition();
+                CellInterface boxcell = map.getMapObject(boxpos);
 
-            boolean isbox = game.isBox(newpos);
-            boolean isstepable = newcell.isStepable();
-
-            if (!isbox && isstepable) {
                 boxcell.onStepOut();
                 setDirection(newdir);
                 box.setPosition(newpos);
                 newcell.onStepIn(box);
             }
-
         } else {
             setDirection(newdir);
         }

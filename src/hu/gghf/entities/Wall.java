@@ -1,5 +1,8 @@
 package hu.gghf.entities;
 
+import hu.gghf.interfaces.CellInterface;
+import hu.gghf.interfaces.Moveable;
+
 public class Wall implements CellInterface {
     @Override
     public boolean isStepable() {
@@ -7,14 +10,10 @@ public class Wall implements CellInterface {
     }
 
     @Override
-    public void onStepIn(Location object) {
-
-    }
+    public void onStepIn(Moveable object) { }
 
     @Override
-    public void onStepOut() {
-
-    }
+    public void onStepOut() { }
 
     @Override
     public boolean isShootable() {
@@ -22,7 +21,5 @@ public class Wall implements CellInterface {
     }
 
     @Override
-    public void shoot(Player player, Color color) {
-
-    }
+    public void shot(Player player, Color color) { }
 }
