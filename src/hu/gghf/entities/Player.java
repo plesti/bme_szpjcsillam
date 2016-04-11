@@ -63,27 +63,6 @@ public class Player extends Moveable implements Controllable {
     }
     public Box getCarry() { return carryObject; }
 
-    public Point posInDirection(Direction direction, int distance) {
-        Point pos = getPosition();
-        int x = pos.x, y = pos.y;
-
-        switch (direction) {
-            case UP:
-                y -= distance;
-                break;
-            case DOWN:
-                y += distance;
-                break;
-            case LEFT:
-                x -= distance;
-                break;
-            case RIGHT:
-                x += distance;
-                break;
-        }
-        return new Point(x, y);
-    }
-
     private Shootable findTarget() {
         Shootable target = null;
 
@@ -110,8 +89,8 @@ public class Player extends Moveable implements Controllable {
                 CellInterface frontcell2 = map.getMapObject(frontpos2);
 
                 if (frontcell2.isStepable()) {
-                    currentcell.onStepOut();
-                    frontcell.onStepOut();
+                    currentcell.onStepOut(this);
+                    frontcell.onStepOut(this);
 
                     // Player elore lep
                     setPosition(frontpos);
@@ -126,7 +105,7 @@ public class Player extends Moveable implements Controllable {
                 }
 
             } else if (getbox == null) {
-                currentcell.onStepOut();
+                currentcell.onStepOut(this);
                 setPosition(frontpos);
                 frontcell.onStepIn(this);
             }
@@ -143,7 +122,7 @@ public class Player extends Moveable implements Controllable {
                 Point boxpos = box.getPosition();
                 CellInterface boxcell = map.getMapObject(boxpos);
 
-                boxcell.onStepOut();
+                boxcell.onStepOut(this);
                 setDirection(newdir);
                 box.setPosition(newpos);
                 newcell.onStepIn(box);

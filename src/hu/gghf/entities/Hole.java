@@ -14,7 +14,7 @@ public class Hole implements CellInterface {
         object.destroy();
     }
     @Override
-    public void onStepOut() {
+    public void onStepOut(Moveable object) {
     }
 
     @Override

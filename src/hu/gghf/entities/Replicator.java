@@ -1,9 +1,12 @@
 package hu.gghf.entities;
 
+import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Controllable;
 import hu.gghf.interfaces.Moveable;
 import hu.gghf.interfaces.Shootable;
 import hu.gghf.model.Map;
+
+import java.awt.*;
 
 public class Replicator extends Moveable implements Controllable, Shootable {
     private boolean dead = false;
@@ -21,7 +24,7 @@ public class Replicator extends Moveable implements Controllable, Shootable {
 
     @Override
     public float getWeight() {
-        return 0;
+        return 0.0f;
     }
 
     @Override
@@ -35,8 +38,17 @@ public class Replicator extends Moveable implements Controllable, Shootable {
     }
 
     @Override
-    public void move(Direction direction) {
-        // TODO: mozgas
+    public void move(Direction dir) {
+        if (this.direction == dir) {
+            Point frontpos = posInDirection(this.direction, 1);
+            CellInterface frontcell = map.getMapObject(frontpos);
+
+            if (frontcell.isStepable()) {
+                setPosition(frontpos);
+            }
+        } else {
+            setDirection(dir);
+        }
     }
 
     @Override

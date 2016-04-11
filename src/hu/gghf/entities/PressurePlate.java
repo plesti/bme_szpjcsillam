@@ -9,6 +9,7 @@ import java.awt.*;
 public class PressurePlate implements CellInterface {
     private final Map map;
     private Point door;
+    private float weight = 0.0f;
 
     public PressurePlate(Map map, Point door) {
         this.door = door;
@@ -23,16 +24,18 @@ public class PressurePlate implements CellInterface {
     @Override
     public void onStepIn(Moveable obj) {
         Door d = (Door) map.getMapObject(door);
+        weight += obj.getWeight();
         // TODO: sulyozas
-        if (d != null)
+        if (d != null && weight >= 1.0f)
             d.setOpen(true);
     }
 
     @Override
-    public void onStepOut() {
+    public void onStepOut(Moveable obj) {
         Door d = (Door) map.getMapObject(door);
+        weight += obj.getWeight();
 
-        if (d != null)
+        if (d != null && weight < 1.0f)
             d.setOpen(false);
     }
 

@@ -13,7 +13,7 @@ public class Wall implements CellInterface {
     public void onStepIn(Moveable object) { }
 
     @Override
-    public void onStepOut() { }
+    public void onStepOut(Moveable object) { }
 
     @Override
     public boolean isShootable() {

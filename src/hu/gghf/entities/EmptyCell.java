@@ -9,12 +9,10 @@ public class EmptyCell implements CellInterface {
     @Override
     public void onStepIn(Moveable object) { }
     @Override
-    public void onStepOut() { }
+    public void onStepOut(Moveable object) { }
     @Override
     public boolean isShootable() { return false; }
 
     @Override
-    public void shot(Player player, Color color) {
-
-    }
+    public void shot(Player player, Color color) { }
 }

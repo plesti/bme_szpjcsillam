@@ -17,7 +17,7 @@ public class Door implements CellInterface {
     public void onStepIn(Moveable object) { }
 
     @Override
-    public void onStepOut() { }
+    public void onStepOut(Moveable obj) { }
 
     @Override
     public boolean isShootable() { return !open; }

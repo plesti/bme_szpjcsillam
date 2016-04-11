@@ -3,12 +3,15 @@ package hu.gghf.entities;
 import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Location;
 import hu.gghf.interfaces.Moveable;
+import hu.gghf.model.Application;
 
 import java.awt.*;
 
 public class PortalWall extends Location implements CellInterface {
     private static PortalWall blue = null;
     private static PortalWall yellow = null;
+    private static PortalWall red = null;
+    private static PortalWall green = null;
 
     public PortalWall(Point position) {
         this.setPosition(position);
@@ -20,24 +23,33 @@ public class PortalWall extends Location implements CellInterface {
             return true;
         } else if (yellow == this  && blue != null) {
             return true;
+        } else if (red == this  && green != null) {
+            return true;
+        } else if (green == this  && red != null) {
+            return true;
         }
         return false;
     }
 
     @Override
     public void onStepIn(Moveable object) {
-        if (blue == this  && yellow != null) {
+        if (blue == this && yellow != null) {
             object.setPosition(yellow.getPosition());
             object.setDirection(yellow.getDirection());
-        } else if (yellow == this  && blue != null) {
+        } else if (yellow == this && blue != null) {
             object.setPosition(blue.getPosition());
             object.setDirection(blue.getDirection());
+        } else if (red == this && green != null) {
+            object.setPosition(green.getPosition());
+            object.setDirection(green.getDirection());
+        } else if (green == this && red != null) {
+            object.setPosition(red.getPosition());
+            object.setDirection(red.getDirection());
         }
-        // TODO: szinek?
     }
 
     @Override
-    public void onStepOut() {
+    public void onStepOut(Moveable object) {
     }
 
     @Override
@@ -49,10 +61,12 @@ public class PortalWall extends Location implements CellInterface {
     public void shot(Player player, Color color) {
         if (color == Color.BLUE) {
             blue = this;
-            System.out.println(String.format("Kekvagyok: %s,%s", getPosition().x, getPosition().y));
-        } else {
+        } else if (color == Color.YELLOW) {
             yellow = this;
-            System.out.println(String.format("Sargavagyok: %s,%s", getPosition().x, getPosition().y));
+        } else if (color == Color.RED) {
+            red = this;
+        } else if (color == Color.GREEN) {
+            green = this;
         }
 
         Direction pdir = player.getDirection();
@@ -71,5 +85,11 @@ public class PortalWall extends Location implements CellInterface {
                 setDirection(Direction.LEFT);
                 break;
         }
+
+        Application.printCall(this, String.format("Portal loves: [%s,%s] %s -> %s",
+                getPosition().x,
+                getPosition().y,
+                color,
+                isStepable()));
     }
 }

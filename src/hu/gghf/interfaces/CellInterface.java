@@ -6,5 +6,5 @@ public interface CellInterface extends Shootable {
      */
     boolean isStepable();
     void onStepIn(Moveable object);
-    void onStepOut();
+    void onStepOut(Moveable object);
 }

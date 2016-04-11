@@ -14,6 +14,7 @@ public class Application {
     public static BufferedReader br = null;
     private Map map = null;
     boolean exit = false;
+    boolean test = false;
 
     public static void main(String[] args) {
         br = new BufferedReader(new InputStreamReader(System.in));
@@ -23,7 +24,7 @@ public class Application {
             try {
                 String s = br.readLine();
                 app.sendCommand(s);
-                app.printmap();
+//                app.printmap();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -93,7 +94,8 @@ public class Application {
     }
 
     public static void printCall(Object obj, String msg) {
-        System.out.println(String.format("[%s] %s", obj.getClass().getSimpleName(), msg));
+//        System.out.println(String.format("[%s] %s", obj.getClass().getSimpleName(), msg));
+        System.out.println(msg);
     }
 
     public void printmap() {
@@ -148,27 +150,22 @@ public class Application {
                             row += "_";
                             break;
                     }
-                }
-                else if (map.getBox(point) != null) {
+                } else if (map.getBox(point) != null) {
                     row += "b";
-                }
-                else if (obj.getClass() == Door.class) {
+                } else if (obj.getClass() == Door.class) {
                     row += "a";
-                }
-                else if (obj.getClass() == Wall.class) {
+                } else if (obj.getClass() == Wall.class) {
                     row += "x";
-                }
-                else if (obj.getClass() == EmptyCell.class) {
+                } else if (obj.getClass() == EmptyCell.class) {
                     row += "0";
-                }
-                else if (obj.getClass() == PortalWall.class) {
+                } else if (obj.getClass() == PortalWall.class) {
                     row += "p";
-                }
-                else if (obj.getClass() == PressurePlate.class) {
+                } else if (obj.getClass() == PressurePlate.class) {
                     row += "n";
-                }
-                else if (obj.getClass() == Hole.class) {
-                    row += "n";
+                } else if (obj.getClass() == Hole.class) {
+                    row += "h";
+                } else if (obj.getClass() == ZPM.class) {
+                    row += "z";
                 }
                 else {
                     row += "-";

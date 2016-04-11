@@ -86,6 +86,9 @@ public class Map {
                     case 'p':
                         map.setMapObject(p, new PortalWall(p));
                         break;
+                    case 'z':
+                        map.setMapObject(p, new ZPM(map));
+                        break;
                     case 'b':
                         Box box = new Box();
                         box.setPosition(p);
@@ -98,6 +101,8 @@ public class Map {
             i++;
         }
         nf.close();
+
+        Application.printCall(Map.class, "Sikeresen betoltve: " + path);
 
         Player p1 = new Player(map);
         p1.setPosition(new Point(2,2));

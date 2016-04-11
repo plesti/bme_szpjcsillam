@@ -4,6 +4,7 @@ import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Moveable;
 public class ShieldGenerator implements CellInterface {
     public ShieldGenerator() {
+        // TODO: gameevents?
     }
 
     @Override
@@ -17,7 +18,7 @@ public class ShieldGenerator implements CellInterface {
     }
 
     @Override
-    public void onStepOut() {
+    public void onStepOut(Moveable object) {
     }
 
     @Override
