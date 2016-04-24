@@ -1,0 +1,4 @@
+Sikeresen betoltve: palya1.csv
+Uj pozicio [0]: [2,2] UP
+Uj pozicio [0]: [2,2] RIGHT
+Uj pozicio [0]: [1,2] LEFT

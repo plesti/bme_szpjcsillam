@@ -1,0 +1,4 @@
+loadmap palya1.csv
+move 0 up
+move 0 left
+move 0 left
