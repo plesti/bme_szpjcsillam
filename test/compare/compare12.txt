@@ -1,0 +1,9 @@
+Determinisztikus uzemmod aktivalva
+Sikeresen betoltve: test/mapok/test12_repl_shoot.csv
+|x |aV|x |
+|x |r>|x |
+|x |p |x |
+Replikator meghalt!
+|x |aV|x |
+|x |0 |x |
+|x |p |x |
