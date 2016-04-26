@@ -1,0 +1,10 @@
+testmode
+loadmap test/mapok/test4_repl_move.csv
+showmap
+move 2 up
+move 2 left
+move 2 left
+move 2 right
+move 2 right
+showmap
+quit

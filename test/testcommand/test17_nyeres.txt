@@ -1,0 +1,12 @@
+testmode
+loadmap test/mapok/test17.csv
+showmap
+move 0 right
+move 0 down
+move 0 down
+move 0 down
+move 0 left
+move 0 left
+move 0 up
+move 0 up
+quit

@@ -25,7 +25,7 @@ public class PressurePlate implements CellInterface {
     public void onStepIn(Moveable obj) {
         Door d = (Door) map.getMapObject(door);
         weight += obj.getWeight();
-        // TODO: sulyozas
+
         if (d != null && weight >= 1.0f)
             d.setOpen(true);
     }
@@ -33,7 +33,7 @@ public class PressurePlate implements CellInterface {
     @Override
     public void onStepOut(Moveable obj) {
         Door d = (Door) map.getMapObject(door);
-        weight += obj.getWeight();
+        weight -= obj.getWeight();
 
         if (d != null && weight < 1.0f)
             d.setOpen(false);

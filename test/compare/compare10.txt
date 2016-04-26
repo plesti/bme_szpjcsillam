@@ -1,0 +1,10 @@
+Determinisztikus uzemmod aktivalva
+Sikeresen betoltve: test/mapok/test10_box_hole.csv
+|h |0 |
+|a>|b |
+Doboz felvetele [0]: [1,1]
+Szetestem!
+Uj pozicio [0]: [0,1] UP
+Doboz letetele [0]: [0,0]
+|h |0 |
+|a^|0 |

@@ -1,0 +1,10 @@
+Determinisztikus uzemmod aktivalva
+Sikeresen betoltve: test/mapok/test9_repl_hole.csv
+|x |h |x |
+|x |r^|x |
+|x |0 |x |
+Replikator meghalt a szakadekban!
+Uj pozicio [2]: [1,0] UP
+|x |0 |x |
+|x |0 |x |
+|x |0 |x |

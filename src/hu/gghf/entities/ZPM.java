@@ -25,15 +25,34 @@ public class ZPM implements CellInterface {
 
     @Override
     public void onStepIn(Moveable obj) {
-        if (!discovered && obj.getClass() == Player.class) {
+        if (!discovered) {
+            int zpms = 0;
+
             if (zpm_counter.containsKey(obj)) {
-                zpm_counter.put(obj, zpm_counter.get(obj) + 1);
+                zpms = zpm_counter.get(obj) + 1;
+                zpm_counter.put(obj, zpms);
             } else {
-                zpm_counter.put(obj, 1);
+                zpms = 1;
+                zpm_counter.put(obj, zpms);
             }
-            Application.printCall(this, "ZPM felveve: " + zpm_counter.get(obj));
             discovered = true;
-            putRandomZPM();
+
+            if (!Application.test && obj.getClass() == Player.class && zpms == 2) {
+                putRandomZPM();
+            } else if (Application.test && obj.getClass() == Player.class && zpms == 2) {
+                putInfrontZPM(obj);
+            }
+
+            Application.printCall(this, "ZPM felveve: " + zpm_counter.get(obj));
+        }
+    }
+
+    private void putInfrontZPM(Moveable obj) {
+        Point point = obj.posInDirection(obj.getDirection(), 1);
+        CellInterface cell = map.getMapObject(point);
+
+        if (cell.getClass() == EmptyCell.class || (cell.getClass() == ZPM.class && ((ZPM)cell).isDiscovered())) {
+            map.setMapObject(point, new ZPM(map));
         }
     }
 
@@ -43,13 +62,17 @@ public class ZPM implements CellInterface {
         Point point = null;
 
         while (cell == null || (cell.getClass() != EmptyCell.class)) {
-            int x = random.nextInt(this.map.maxsize - 1);
-            int y = random.nextInt(this.map.maxsize - 1);
+            int x = random.nextInt(this.map.maxsize);
+            int y = random.nextInt(this.map.maxsize);
             point = new Point(x, y);
             cell = map.getMapObject(point);
-            System.out.println("x:" + x + " y:" + y);
+//            System.out.println("x:" + x + " y:" + y);
         }
         map.setMapObject(point, new ZPM(map));
+    }
+
+    public boolean isDiscovered() {
+        return discovered;
     }
 
     @Override
@@ -64,5 +87,12 @@ public class ZPM implements CellInterface {
     @Override
     public void shot(Player player, Color color) {
 
+    }
+
+    public static int getZPMCount(Moveable object) {
+        if (zpm_counter.containsKey(object)) {
+            return zpm_counter.get(object);
+        }
+        return 0;
     }
 }

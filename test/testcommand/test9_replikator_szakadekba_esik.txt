@@ -1,0 +1,6 @@
+testmode
+loadmap test/mapok/test9_repl_hole.csv
+showmap
+move 2 up
+showmap
+quit

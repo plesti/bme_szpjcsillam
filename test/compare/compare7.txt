@@ -1,0 +1,18 @@
+Determinisztikus uzemmod aktivalva
+Sikeresen betoltve: test/mapok/test7_player_portal.csv
+|x |x |x |x |
+|p |a>|0 |p |
+|p |0 |f<|p |
+|x |x |x |x |
+Portal loves: [3,1] BLUE -> false
+Uj pozicio [0]: [1,1] LEFT
+Portal loves: [0,1] YELLOW -> true
+Uj pozicio [0]: [3,1] LEFT
+Portal loves: [0,2] GREEN -> false
+Uj pozicio [1]: [2,2] RIGHT
+Portal loves: [3,2] RED -> true
+Uj pozicio [1]: [0,2] RIGHT
+|x |x |x |x |
+|Py|0 |0 |a<|
+|f>|0 |0 |Pr|
+|x |x |x |x |

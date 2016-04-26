@@ -36,8 +36,7 @@ public class Player extends Moveable implements Controllable {
 
     @Override
     public void destroy() {
-        // TODO
-        Application.printCall(this, "Meghaltam");
+        Application.printCall(this, "Jatekos meghalt!");
     }
 
     @Override
@@ -67,7 +66,14 @@ public class Player extends Moveable implements Controllable {
         Shootable target = null;
 
         for (int i = 1; i < 8; i++) {
-            target = map.getMapObject(posInDirection(this.direction, i));
+            Point loc = posInDirection(this.direction, i);
+            Replicator replicator = map.getReplicator();
+
+            if (replicator != null && replicator.getPosition().equals(loc)) {
+                target = map.getReplicator();
+            } else {
+                target = map.getMapObject(loc);
+            }
 
             if (target.isShootable()) {
                 return target;

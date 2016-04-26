@@ -1,4 +1,1 @@
-Sikeresen betoltve: palya1.csv
-Uj pozicio [0]: [2,2] UP
-Uj pozicio [0]: [2,2] LEFT
-Uj pozicio [0]: [1,2] LEFT
+Palya betoltese sikertelen: c:\projektek\intellij\forgatott\test\mapok\nem_letezo.csv

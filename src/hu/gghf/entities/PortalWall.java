@@ -31,6 +31,19 @@ public class PortalWall extends Location implements CellInterface {
         return false;
     }
 
+    public Color getColor() {
+        if (blue == this) {
+            return Color.BLUE;
+        } else if (yellow == this) {
+            return Color.YELLOW;
+        } else if (red == this) {
+            return Color.RED;
+        } else if (green == this) {
+            return Color.GREEN;
+        }
+        return null;
+    }
+
     @Override
     public void onStepIn(Moveable object) {
         if (blue == this && yellow != null) {

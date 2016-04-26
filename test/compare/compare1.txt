@@ -1,4 +1,6 @@
-Sikeresen betoltve: palya1.csv
-Uj pozicio [0]: [2,2] UP
-Uj pozicio [0]: [2,2] LEFT
-Uj pozicio [0]: [1,2] LEFT
+Determinisztikus uzemmod aktivalva
+Sikeresen betoltve: test/mapok/test1_betoltes.csv
+|x |n |d |b |
+|f>|a>|r>|0 |
+|g |z |h |p |
+|0 |0 |0 |0 |

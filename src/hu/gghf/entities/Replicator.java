@@ -4,12 +4,12 @@ import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Controllable;
 import hu.gghf.interfaces.Moveable;
 import hu.gghf.interfaces.Shootable;
+import hu.gghf.model.Application;
 import hu.gghf.model.Map;
 
 import java.awt.*;
 
 public class Replicator extends Moveable implements Controllable, Shootable {
-    private boolean dead = false;
     protected Map map;
 
     public Replicator(Map map) {
@@ -18,8 +18,9 @@ public class Replicator extends Moveable implements Controllable, Shootable {
 
     @Override
     public void destroy() {
-        dead = true;
+        map.setReplicator(null);
         map.setMapObject(this.position, new EmptyCell());
+        Application.printCall(this, "Replikator meghalt a szakadekban!");
     }
 
     @Override
@@ -34,7 +35,8 @@ public class Replicator extends Moveable implements Controllable, Shootable {
 
     @Override
     public void shot(Player player, Color color) {
-       dead = true;
+        map.setReplicator(null);
+        Application.printCall(this, "Replikator meghalt!");
     }
 
     @Override
@@ -45,6 +47,10 @@ public class Replicator extends Moveable implements Controllable, Shootable {
 
             if (frontcell.isStepable()) {
                 setPosition(frontpos);
+
+                if (frontcell.getClass() == Hole.class) {
+                    frontcell.onStepIn(this);
+                }
             }
         } else {
             setDirection(dir);

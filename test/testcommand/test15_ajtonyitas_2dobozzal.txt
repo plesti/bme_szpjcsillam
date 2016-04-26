@@ -1,0 +1,11 @@
+testmode
+loadmap test/mapok/test15.csv
+showmap
+pickbox 0
+move 0 left
+dropbox 0
+move 0 down
+pickbox 0
+move 0 left
+showmap
+quit

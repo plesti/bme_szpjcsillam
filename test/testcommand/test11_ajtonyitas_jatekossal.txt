@@ -1,0 +1,9 @@
+testmode
+loadmap test/mapok/test11_player_door.csv
+showmap
+move 0 left
+showmap
+move 0 right
+move 0 right
+showmap
+quit

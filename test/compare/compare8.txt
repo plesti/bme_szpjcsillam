@@ -1,0 +1,12 @@
+Determinisztikus uzemmod aktivalva
+Sikeresen betoltve: test/mapok/test8_player_hole.csv
+|x |x |x |
+|a>|h |f<|
+|x |x |x |
+Jatekos meghalt!
+Uj pozicio [0]: [1,1] RIGHT
+Jatekos meghalt!
+Uj pozicio [1]: [1,1] LEFT
+|x |x |x |
+|0 |a>|0 |
+|x |x |x |

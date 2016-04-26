@@ -1,0 +1,18 @@
+Determinisztikus uzemmod aktivalva
+Sikeresen betoltve: test/mapok/test17.csv
+|0 |a>|z |
+|0 |g |z |
+|0 |z |0 |
+ZPM felveve: 1
+Uj pozicio [0]: [2,0] RIGHT
+Uj pozicio [0]: [2,0] DOWN
+ZPM felveve: 2
+Uj pozicio [0]: [2,1] DOWN
+ZPM felveve: 3
+Uj pozicio [0]: [2,2] DOWN
+Uj pozicio [0]: [2,2] LEFT
+ZPM felveve: 4
+Uj pozicio [0]: [1,2] LEFT
+Uj pozicio [0]: [1,2] UP
+Jatekos nyert!
+Uj pozicio [0]: [1,1] UP

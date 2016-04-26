@@ -1,0 +1,13 @@
+Determinisztikus uzemmod aktivalva
+Sikeresen betoltve: test/mapok/test13_zpm_pickup.csv
+|x |0 |0 |
+|x |z |0 |
+|x |z |a<|
+ZPM felveve: 1
+Uj pozicio [0]: [1,2] LEFT
+Uj pozicio [0]: [1,2] UP
+ZPM felveve: 2
+Uj pozicio [0]: [1,1] UP
+|x |z |0 |
+|x |a^|0 |
+|x |0 |0 |

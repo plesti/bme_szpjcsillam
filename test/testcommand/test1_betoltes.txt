@@ -1,0 +1,4 @@
+testmode
+loadmap test/mapok/test1_betoltes.csv
+showmap
+quit

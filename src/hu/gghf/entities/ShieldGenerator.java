@@ -2,9 +2,10 @@ package hu.gghf.entities;
 
 import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Moveable;
+import hu.gghf.model.Application;
+
 public class ShieldGenerator implements CellInterface {
     public ShieldGenerator() {
-        // TODO: gameevents?
     }
 
     @Override
@@ -14,7 +15,11 @@ public class ShieldGenerator implements CellInterface {
 
     @Override
     public void onStepIn(Moveable object) {
-        // TODO: jatekvege?
+        int zpms = ZPM.getZPMCount(object);
+
+        if (zpms >= 4) {
+            Application.printCall(this, "Jatekos nyert!");
+        }
     }
 
     @Override

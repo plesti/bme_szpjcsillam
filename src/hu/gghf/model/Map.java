@@ -2,6 +2,8 @@ package hu.gghf.model;
 
 import hu.gghf.entities.*;
 import hu.gghf.interfaces.CellInterface;
+import hu.gghf.interfaces.Location;
+import hu.gghf.interfaces.Moveable;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -13,7 +15,9 @@ public class Map {
     private CellInterface[][] map;
     private ArrayList<Box> boxes;
     protected Player oneil, jaffa;
-    private Replicator replicator;
+
+
+    protected Replicator replicator;
     // Ez majd a terkep merete
     public int maxsize = 6;
 
@@ -24,8 +28,19 @@ public class Map {
         boxes = new ArrayList<Box>();
     }
 
+    public void setReplicator(Replicator replicator) {
+        this.replicator = replicator;
+    }
+    public Replicator getReplicator() {
+        return replicator;
+    }
+
     public CellInterface getMapObject(Point point) {
-        return map[point.y][point.x];
+        try {
+            return map[point.y][point.x];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new Wall();
+        }
     }
 
     public void setMapObject(Point point, CellInterface cell) {
@@ -49,28 +64,28 @@ public class Map {
         Map map = null;
 
         int i = 0;
-        //görgetve növelt ciklusváltozó, ami egyben az elem sorkoordinátája is.
+        //gï¿½rgetve nï¿½velt ciklusvï¿½ltozï¿½, ami egyben az elem sorkoordinï¿½tï¿½ja is.
 
         String line;
-        //szöveges változó egy pályasor tárolásához.
+        //szï¿½veges vï¿½ltozï¿½ egy pï¿½lyasor tï¿½rolï¿½sï¿½hoz.
 
-        /*  Fájlbeolvasás rutinja:
-         *  - egy sort beolvasunk a line változóba;
-         *  - a beolvasott sort határolók mentén széttördeljük elemekre;
-         *  - egy oszlopváltozót folyamosan iterálva a maximum méretig,
-         *    megvizsgáljuk a tömbelem elsõ karakterét.
-         *  - az elsõ karakter értékétõl függõen:
+        /*  Fï¿½jlbeolvasï¿½s rutinja:
+         *  - egy sort beolvasunk a line vï¿½ltozï¿½ba;
+         *  - a beolvasott sort hatï¿½rolï¿½k mentï¿½n szï¿½ttï¿½rdeljï¿½k elemekre;
+         *  - egy oszlopvï¿½ltozï¿½t folyamosan iterï¿½lva a maximum mï¿½retig,
+         *    megvizsgï¿½ljuk a tï¿½mbelem elsï¿½ karakterï¿½t.
+         *  - az elsï¿½ karakter ï¿½rtï¿½kï¿½tï¿½l fï¿½ggï¿½en:
          *     - ha 'x': falat olvastunk be;
-         *     - ha '0': üres padlólapot olvastunk be;
-         *     - ha 'p': portálfalat olvastunk be;
+         *     - ha '0': ï¿½res padlï¿½lapot olvastunk be;
+         *     - ha 'p': portï¿½lfalat olvastunk be;
          *     - ha 'b': dobozt olvastunk be.
-         *  - a rögzített pályaelemeket betesszük a map-ba. Doboz esetében
-         *    (mivel nem önállóan pályaelem), egy üres lapot teszünk be,
-         *    miközben magát a dobozt is regisztráljuk a dobozok tömbjében.
+         *  - a rï¿½gzï¿½tett pï¿½lyaelemeket betesszï¿½k a map-ba. Doboz esetï¿½ben
+         *    (mivel nem ï¿½nï¿½llï¿½an pï¿½lyaelem), egy ï¿½res lapot teszï¿½nk be,
+         *    mikï¿½zben magï¿½t a dobozt is regisztrï¿½ljuk a dobozok tï¿½mbjï¿½ben.
          */
+        
         while ((line = nf.readLine()) != null) {
             String[] params = line.split(";");
-            // TODO: paster tutira
             if (map == null)
                 map = new Map(params.length);
 
@@ -86,27 +101,109 @@ public class Map {
                     case 'p':
                         map.setMapObject(p, new PortalWall(p));
                         break;
-                    case 'z':
-                        map.setMapObject(p, new ZPM(map));
+                    case 'd':
+                        map.setMapObject(p, new Door());
+                        break;
+                    case 'D':
+                        Door d = new Door();
+                        d.setOpen(true);
+                        map.setMapObject(p, d);
+                        break;
+                    case 'n':
+                        String mezo = params[j];
+                        String mezo1 = mezo.replace("n[", "");
+                        String mezo2 = mezo1.replace("]", "");
+                        String[] coords = mezo2.split(",");
+                        int x = Integer.parseInt(coords[0]);
+                        int y = Integer.parseInt(coords[1]);
+                        map.setMapObject(p, new PressurePlate(map, new Point(y,x)));
+                        break;
+                    case 'h':
+                    	map.setMapObject(p, new Hole());
+                        break;
+                    case 'g':
+                    	map.setMapObject(p, new ShieldGenerator());
                         break;
                     case 'b':
-                        Box box = new Box();
+                        Box box = new Box(map);
                         box.setPosition(p);
                         map.addBox(box);
                         map.setMapObject(p, new EmptyCell());
                         break;
-                    default: break;
+                    case 'z':
+                        map.setMapObject(p, new ZPM(map));
+                        break;
+                    case 'a':
+                    	map.oneil = new Player(map);
+                    	map.oneil.setPosition(p);
+                    	map.setMapObject(p, new EmptyCell());
+                    	switch (params[j].charAt(1)) {
+                            case '^':
+                                map.oneil.setDirection(Location.Direction.UP);
+                                break;
+                            case 'V':
+                                map.oneil.setDirection(Location.Direction.DOWN);
+                                break;
+                            case '<':
+                                map.oneil.setDirection(Location.Direction.LEFT);
+                                break;
+                            case '>':
+                                map.oneil.setDirection(Location.Direction.RIGHT);
+                                break;
+                            default: break;
+                    	}
+                    	break;
+                    case 'f':
+                    	map.jaffa = new Player(map);
+                    	map.jaffa.setPosition(p);
+                    	map.setMapObject(p, new EmptyCell());
+                    	switch (params[j].charAt(1)) {
+                            case '^':
+                                map.jaffa.setDirection(Location.Direction.UP);
+                                break;
+                            case 'V':
+                                map.jaffa.setDirection(Location.Direction.DOWN);
+                                break;
+                            case '<':
+                                map.jaffa.setDirection(Location.Direction.LEFT);
+                                break;
+                            case '>':
+                                map.jaffa.setDirection(Location.Direction.RIGHT);
+                                break;
+                            default: break;
+                    	}
+                    	break;
+                    case 'r':
+                    	map.replicator = new Replicator(map);
+                    	map.replicator.setPosition(p);
+                    	map.setMapObject(p, new EmptyCell());
+                    	switch (params[j].charAt(1)) {
+                            case '^':
+                                map.replicator.setDirection(Location.Direction.UP);
+                                break;
+                            case 'V':
+                                map.replicator.setDirection(Location.Direction.DOWN);
+                                break;
+                            case '<':
+                                map.replicator.setDirection(Location.Direction.LEFT);
+                                break;
+                            case '>':
+                                map.replicator.setDirection(Location.Direction.RIGHT);
+                                break;
+                            default: break;
+                    	}
+                    	break;
+                    default:
+                        Application.printCall(map, "Nem ismert palyaelem a forrasfajlban! \"" + params[j] + "\"");
+                        map.setMapObject(p, new EmptyCell());
+                        break;
                 }
+                
             }
             i++;
         }
         nf.close();
 
-        Application.printCall(Map.class, "Sikeresen betoltve: " + path);
-
-        Player p1 = new Player(map);
-        p1.setPosition(new Point(2,2));
-        map.oneil = p1;
 
         return map;
     }
@@ -117,5 +214,9 @@ public class Map {
         else if (index.equals("1"))
             return jaffa;
         return null;
+    }
+
+    public void removeBox(Box box) {
+        boxes.remove(box);
     }
 }

@@ -1,0 +1,9 @@
+testmode
+loadmap test/mapok/test6_repl_portal.csv
+showmap
+shootportal 0 blue
+move 0 down
+shootportal 0 yellow
+move 2 right
+showmap
+quit

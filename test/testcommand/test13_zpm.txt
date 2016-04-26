@@ -1,0 +1,8 @@
+testmode
+loadmap test/mapok/test13_zpm_pickup.csv
+showmap
+move 0 left
+move 0 up
+move 0 up
+showmap
+quit

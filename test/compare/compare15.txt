@@ -1,0 +1,14 @@
+Determinisztikus uzemmod aktivalva
+Sikeresen betoltve: test/mapok/test15.csv
+|0 |0 |d |
+|n |a>|b |
+|0 |b |0 |
+Doboz felvetele [0]: [2,1]
+Uj pozicio [0]: [1,1] LEFT
+Doboz letetele [0]: [0,1]
+Uj pozicio [0]: [1,1] DOWN
+Doboz felvetele [0]: [1,2]
+Uj pozicio [0]: [1,1] LEFT
+|0 |0 |D |
+|b |a<|0 |
+|0 |0 |0 |

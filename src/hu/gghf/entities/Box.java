@@ -2,8 +2,14 @@ package hu.gghf.entities;
 
 import hu.gghf.interfaces.Moveable;
 import hu.gghf.interfaces.Shootable;
+import hu.gghf.model.Map;
 
 public class Box extends Moveable implements Shootable {
+    Map map;
+    public Box(Map map) {
+        this.map = map;
+    }
+
     @Override
     public boolean isShootable() {
         return true;
@@ -15,6 +21,7 @@ public class Box extends Moveable implements Shootable {
 
     @Override
     public void destroy() {
+        map.removeBox(this);
         System.out.println("Szetestem!");
     }
 

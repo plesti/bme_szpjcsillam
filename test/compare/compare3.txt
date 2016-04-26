@@ -1,4 +1,18 @@
-Sikeresen betoltve: palya1.csv
-Uj pozicio [0]: [2,2] UP
-Uj pozicio [0]: [2,2] RIGHT
-Uj pozicio [0]: [1,2] LEFT
+Determinisztikus uzemmod aktivalva
+Sikeresen betoltve: test/mapok/test3_oneil_move.csv
+|n |b |d |
+|0 |a^|x |
+|x |x |x |
+Uj pozicio [0]: [1,1] UP
+Uj pozicio [0]: [1,1] LEFT
+Uj pozicio [0]: [0,1] LEFT
+Uj pozicio [0]: [0,1] UP
+Uj pozicio [0]: [0,0] UP
+|a^|b |D |
+|0 |0 |x |
+|x |x |x |
+Uj pozicio [0]: [0,0] DOWN
+Uj pozicio [0]: [0,1] DOWN
+|n |b |d |
+|aV|0 |x |
+|x |x |x |

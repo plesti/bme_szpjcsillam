@@ -1,0 +1,3 @@
+loadmap test/mapok/nem_letezo.csv
+showmap
+quit

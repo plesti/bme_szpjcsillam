@@ -1,0 +1,13 @@
+Determinisztikus uzemmod aktivalva
+Sikeresen betoltve: test/mapok/test14.csv
+|x |b |x |
+|0 |0 |x |
+|x |a^|x |
+Doboz felvetele [0]: sikertelen
+Uj pozicio [0]: [1,1] UP
+Doboz felvetele [0]: [1,0]
+Uj pozicio [0]: [1,1] UP
+Uj pozicio [0]: [1,1] LEFT
+|x |0 |x |
+|b |a<|x |
+|x |0 |x |
