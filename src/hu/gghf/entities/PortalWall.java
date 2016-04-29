@@ -4,8 +4,10 @@ import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Location;
 import hu.gghf.interfaces.Moveable;
 import hu.gghf.model.Application;
+import hu.gghf.model.Images;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class PortalWall extends Location implements CellInterface {
     private static PortalWall blue = null;
@@ -104,5 +106,33 @@ public class PortalWall extends Location implements CellInterface {
                 getPosition().y,
                 color,
                 isStepable()));
+    }
+
+    @Override
+    public BufferedImage getImage() {
+        if (isStepable()) {
+            switch (getColor()) {
+                case BLUE:
+                    return Images.portal_blue_open;
+                case YELLOW:
+                    return Images.portal_yellow_open;
+                case RED:
+                    return Images.portal_red_open;
+                case GREEN:
+                    return Images.portal_green_open;
+            }
+        } else {
+            switch (getColor()) {
+                case BLUE:
+                    return Images.portal_blue;
+                case YELLOW:
+                    return Images.portal_yellow;
+                case RED:
+                    return Images.portal_red;
+                case GREEN:
+                    return Images.portal_green;
+            }
+        }
+        return null;
     }
 }

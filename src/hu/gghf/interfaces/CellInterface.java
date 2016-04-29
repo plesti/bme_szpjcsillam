@@ -1,8 +1,8 @@
 package hu.gghf.interfaces;
 
-public interface CellInterface extends Shootable {
+public interface CellInterface extends Shootable, Graphic {
     /**
-     * Azért van itt a Color enum, mert a shot metódus második paramétere.
+     * Azï¿½rt van itt a Color enum, mert a shot metï¿½dus mï¿½sodik paramï¿½tere.
      */
     boolean isStepable();
     void onStepIn(Moveable object);

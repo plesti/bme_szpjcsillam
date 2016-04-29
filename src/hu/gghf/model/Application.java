@@ -35,6 +35,7 @@ public class Application {
     }
 
     public Application() {
+        Images.load();
         autopilot = new ReplicatorThread(this);
         autopilot.start();
     }

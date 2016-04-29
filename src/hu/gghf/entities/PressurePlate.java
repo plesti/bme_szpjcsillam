@@ -2,9 +2,11 @@ package hu.gghf.entities;
 
 import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Moveable;
+import hu.gghf.model.Images;
 import hu.gghf.model.Map;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class PressurePlate implements CellInterface {
     private final Map map;
@@ -43,4 +45,9 @@ public class PressurePlate implements CellInterface {
     public boolean isShootable() { return false; }
     @Override
     public void shot(Player player, Color color) { }
+
+    @Override
+    public BufferedImage getImage() {
+        return Images.pressure_plate;
+    }
 }

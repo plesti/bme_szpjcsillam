@@ -3,9 +3,11 @@ package hu.gghf.entities;
 import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Moveable;
 import hu.gghf.model.Application;
+import hu.gghf.model.Images;
 import hu.gghf.model.Map;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -94,5 +96,12 @@ public class ZPM implements CellInterface {
             return zpm_counter.get(object);
         }
         return 0;
+    }
+
+    @Override
+    public BufferedImage getImage() {
+        if (discovered)
+            return Images.emptycell;
+        return Images.zpm;
     }
 }

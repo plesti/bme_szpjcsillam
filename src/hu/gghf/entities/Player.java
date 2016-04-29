@@ -1,15 +1,16 @@
 package hu.gghf.entities;
 
-import hu.gghf.interfaces.CellInterface;
-import hu.gghf.interfaces.Controllable;
-import hu.gghf.interfaces.Moveable;
-import hu.gghf.interfaces.Shootable;
+import hu.gghf.interfaces.*;
 import hu.gghf.model.Application;
+import hu.gghf.model.Images;
 import hu.gghf.model.Map;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 
-public class Player extends Moveable implements Controllable {
+public class Player extends Moveable implements Controllable, Graphic {
     private Box carryObject;
     protected Map map;
 
@@ -136,5 +137,32 @@ public class Player extends Moveable implements Controllable {
         } else {
             setDirection(newdir);
         }
+    }
+
+    @Override
+    public BufferedImage getImage() {
+        double radians = 0.0;
+
+        switch (getDirection()) {
+            case UP:
+                radians = 0.0;
+                break;
+            case LEFT:
+//                radians = -2*Math.PI/4;
+                radians = -Math.PI/2;
+                break;
+            case RIGHT:
+//                radians = 2*Math.PI/4;
+                radians = Math.PI/2;
+                break;
+            case DOWN:
+//                radians = 2*Math.PI/2;
+                radians = Math.PI;
+                break;
+        }
+        AffineTransform transform = new AffineTransform();
+        transform.rotate(radians, Images.oneil.getWidth()/2, Images.oneil.getHeight()/2);
+        AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+        return op.filter(Images.oneil, null);
     }
 }

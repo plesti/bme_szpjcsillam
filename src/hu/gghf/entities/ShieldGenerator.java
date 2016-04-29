@@ -3,6 +3,9 @@ package hu.gghf.entities;
 import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Moveable;
 import hu.gghf.model.Application;
+import hu.gghf.model.Images;
+
+import java.awt.image.BufferedImage;
 
 public class ShieldGenerator implements CellInterface {
     public ShieldGenerator() {
@@ -33,5 +36,10 @@ public class ShieldGenerator implements CellInterface {
 
     @Override
     public void shot(Player player, Color color) {
+    }
+
+    @Override
+    public BufferedImage getImage() {
+        return Images.shieldgen;
     }
 }

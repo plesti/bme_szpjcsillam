@@ -2,6 +2,9 @@ package hu.gghf.entities;
 
 import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Moveable;
+import hu.gghf.model.Images;
+
+import java.awt.image.BufferedImage;
 
 public class EmptyCell implements CellInterface {
     @Override
@@ -15,4 +18,9 @@ public class EmptyCell implements CellInterface {
 
     @Override
     public void shot(Player player, Color color) { }
+
+    @Override
+    public BufferedImage getImage() {
+        return Images.emptycell;
+    }
 }
