@@ -2,7 +2,7 @@ package hu.gghf.interfaces;
 
 import java.awt.*;
 
-public abstract class Moveable extends Location {
+public abstract class Moveable extends Location implements Graphic {
     public Point posInDirection(Direction direction, int distance) {
         Point pos = getPosition();
         int x = pos.x, y = pos.y;

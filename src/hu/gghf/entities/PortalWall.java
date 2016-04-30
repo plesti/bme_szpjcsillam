@@ -110,6 +110,10 @@ public class PortalWall extends Location implements CellInterface {
 
     @Override
     public BufferedImage getImage() {
+        if (getColor() == null) {
+            return Images.portal_wall;
+        }
+        
         if (isStepable()) {
             switch (getColor()) {
                 case BLUE:

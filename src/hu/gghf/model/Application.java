@@ -17,19 +17,27 @@ public class Application {
     public static boolean test = false;
     private ReplicatorThread autopilot;
     public boolean exit = false;
-    private Map map = null;
+    private static Map map = null;
+    private static Window view = null;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         br = new BufferedReader(new InputStreamReader(System.in));
         Application app = new Application();
-
+        app.sendCommand("loadmap palya.csv");
+        view = new Window(map);
+        
         while (!app.exit) {
             try {
-                String s = br.readLine();
-                app.sendCommand(s);
-//                app.printmap();
-            } catch (IOException e) {
+            	view.draw();
+                // String s = br.readLine();
+                // app.sendCommand(s);
+				//  app.printmap();
+            } 
+            /*catch (IOException e) {
                 e.printStackTrace();
+            } */
+            catch (InterruptedException e) {
+            	e.printStackTrace();
             }
         }
     }

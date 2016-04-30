@@ -1,8 +1,11 @@
 package hu.gghf.entities;
 
+import java.awt.image.BufferedImage;
+
 import hu.gghf.interfaces.Moveable;
 import hu.gghf.interfaces.Shootable;
 import hu.gghf.model.Map;
+import hu.gghf.model.Images;
 
 public class Box extends Moveable implements Shootable {
     Map map;
@@ -28,5 +31,10 @@ public class Box extends Moveable implements Shootable {
     @Override
     public float getWeight() {
         return 0.5f;
+    }
+    
+    @Override
+    public BufferedImage getImage() {
+    	return Images.box;
     }
 }

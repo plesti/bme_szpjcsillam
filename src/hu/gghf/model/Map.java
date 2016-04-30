@@ -14,7 +14,8 @@ import java.util.ArrayList;
 public class Map {
     private CellInterface[][] map;
     private ArrayList<Box> boxes;
-    protected Player oneil, jaffa;
+    protected Player oneil;
+    public Jaffa jaffa;
 
 
     protected Replicator replicator;
@@ -68,7 +69,6 @@ public class Map {
 
         String line;
         //sz�veges v�ltoz� egy p�lyasor t�rol�s�hoz.
-
         /*  F�jlbeolvas�s rutinja:
          *  - egy sort beolvasunk a line v�ltoz�ba;
          *  - a beolvasott sort hat�rol�k ment�n sz�tt�rdelj�k elemekre;
@@ -154,7 +154,7 @@ public class Map {
                     	}
                     	break;
                     case 'f':
-                    	map.jaffa = new Player(map);
+                    	map.jaffa = new Jaffa(map);
                     	map.jaffa.setPosition(p);
                     	map.setMapObject(p, new EmptyCell());
                     	switch (params[j].charAt(1)) {
