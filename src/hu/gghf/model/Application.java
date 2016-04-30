@@ -29,13 +29,13 @@ public class Application {
         while (!app.exit) {
             try {
             	view.draw();
-                // String s = br.readLine();
-                // app.sendCommand(s);
+                String s = br.readLine();
+                app.sendCommand(s);
 				//  app.printmap();
             } 
-            /*catch (IOException e) {
+            catch (IOException e) {
                 e.printStackTrace();
-            } */
+            }
             catch (InterruptedException e) {
             	e.printStackTrace();
             }
@@ -44,8 +44,10 @@ public class Application {
 
     public Application() {
         Images.load();
+        /*
         autopilot = new ReplicatorThread(this);
         autopilot.start();
+        */
     }
 
     public static void printCall(Object obj, String msg) {
