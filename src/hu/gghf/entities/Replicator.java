@@ -2,8 +2,8 @@ package hu.gghf.entities;
 
 import hu.gghf.interfaces.*;
 import hu.gghf.model.Application;
-import hu.gghf.model.Images;
 import hu.gghf.model.Map;
+import hu.gghf.view.Images;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;

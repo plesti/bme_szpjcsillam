@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import hu.gghf.interfaces.Moveable;
 import hu.gghf.interfaces.Shootable;
 import hu.gghf.model.Map;
-import hu.gghf.model.Images;
+import hu.gghf.view.Images;
 
 public class Box extends Moveable implements Shootable {
     Map map;

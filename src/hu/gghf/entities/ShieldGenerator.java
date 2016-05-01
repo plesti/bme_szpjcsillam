@@ -3,7 +3,7 @@ package hu.gghf.entities;
 import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Moveable;
 import hu.gghf.model.Application;
-import hu.gghf.model.Images;
+import hu.gghf.view.Images;
 
 import java.awt.image.BufferedImage;
 

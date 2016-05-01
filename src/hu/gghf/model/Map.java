@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class Map {
     private CellInterface[][] map;
     private ArrayList<Box> boxes;
-    protected Player oneil;
-    public Jaffa jaffa;
+    private Player oneil;
+    private Jaffa jaffa;
 
 
     protected Replicator replicator;
@@ -215,6 +215,14 @@ public class Map {
             return jaffa;
         return null;
     }
+    
+    public void deletePlayer(String index) {
+        if (index.equals("0"))
+            oneil = null;
+        else if (index.equals("1"))
+            jaffa = null;
+    }
+    
 
     public void removeBox(Box box) {
         boxes.remove(box);

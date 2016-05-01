@@ -2,8 +2,8 @@ package hu.gghf.entities;
 
 import hu.gghf.interfaces.*;
 import hu.gghf.model.Application;
-import hu.gghf.model.Images;
 import hu.gghf.model.Map;
+import hu.gghf.view.Images;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -38,6 +38,10 @@ public class Player extends Moveable implements Controllable, Graphic {
     @Override
     public void destroy() {
         Application.printCall(this, "Jatekos meghalt!");
+        if (this.getClass()==Jaffa.class)
+        	map.deletePlayer("1");
+        else
+        	map.deletePlayer("0");
     }
 
     @Override

@@ -1,7 +1,7 @@
 package hu.gghf.entities;
 
-import hu.gghf.model.Images;
 import hu.gghf.model.Map;
+import hu.gghf.view.Images;
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;

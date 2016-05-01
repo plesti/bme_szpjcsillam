@@ -1,9 +1,12 @@
 package hu.gghf.model;
 
+import hu.gghf.controller.Controller;
 import hu.gghf.entities.*;
 import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Location;
 import hu.gghf.interfaces.Shootable;
+import hu.gghf.view.Images;
+import hu.gghf.view.Window;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -19,23 +22,25 @@ public class Application {
     public boolean exit = false;
     private static Map map = null;
     private static Window view = null;
+    private static Controller control = null;
 
     public static void main(String[] args) throws InterruptedException {
         br = new BufferedReader(new InputStreamReader(System.in));
         Application app = new Application();
         app.sendCommand("loadmap palya.csv");
-        view = new Window(map);
+        view = new Window(app,map);
+        control = new Controller(view);
         
         while (!app.exit) {
             try {
             	view.draw();
-                String s = br.readLine();
-                app.sendCommand(s);
+                //String s = br.readLine();
+                //app.sendCommand(s);
 				//  app.printmap();
             } 
-            catch (IOException e) {
+            /*catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
             catch (InterruptedException e) {
             	e.printStackTrace();
             }
@@ -44,10 +49,10 @@ public class Application {
 
     public Application() {
         Images.load();
-        /*
+        
         autopilot = new ReplicatorThread(this);
         autopilot.start();
-        */
+        
     }
 
     public static void printCall(Object obj, String msg) {
