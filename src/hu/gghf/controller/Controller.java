@@ -9,8 +9,8 @@ import hu.gghf.view.Window;
 public class Controller {
 
 	private Window w;
-	private boolean jaffa_pressed_box = false;
-	private boolean oneil_pressed_box = false;
+	/*private boolean jaffa_pressed_box = false;
+	private boolean oneil_pressed_box = false;*/
 	public Controller(Window w) {
 		this.w = w;
 		w.addKeyListener(new MoveEventer());
@@ -57,6 +57,12 @@ public class Controller {
 				break;
 			case 'p':
 				cmd = "shootportal 1 green";
+				break;
+			case 'q':
+				cmd = "pickbox 0";
+				break;
+			case 'u':
+				cmd = "pickbox 1";
 				break;
 			default:
 				cmd = "";
