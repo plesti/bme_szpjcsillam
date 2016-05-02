@@ -48,9 +48,8 @@ public class Window extends JFrame {
 		g_canvas = (Graphics2D)canvas.getGraphics();
 		double height_ratio = (double)canvas_size_y / (double)this.getPreferredSize().height;
 		double width_ratio = (double)canvas_size_x / (double)this.getPreferredSize().width;
-		g_canvas.setColor(Color.GREEN);
+		g_canvas.setColor(Color.BLACK);
 		g_canvas.fillRect(0, 0, canvas_size_x, canvas_size_y-25);
-		g_main.drawImage(canvas,0,0,canvas_size_x,canvas_size_y,null);
 		for (int i = 0; i < map.maxsize; i++) {
 			for (int j = 0; j < map.maxsize; j++) {
 				drawObject(g_canvas, map.getMapObject(new Point(i,j)).getImage(), width_ratio, height_ratio, width_ratio*i*40.0, height_ratio*j*40.0+25, transform);
@@ -68,7 +67,7 @@ public class Window extends JFrame {
 		if (map.getPlayer("0") != null)
 		drawObject(g_canvas, map.getPlayer("0").getImage(), width_ratio, height_ratio, width_ratio*map.getPlayer("0").getPosition().x*40.0, height_ratio*map.getPlayer("0").getPosition().y*40.0+25, transform);
 		g_main.drawImage(canvas,0,0,this.getWidth(),this.getHeight(),null);
-		Thread.sleep(50);
+		Thread.sleep(100);
 		}
 		catch (InterruptedException e) {
 			e.printStackTrace();
