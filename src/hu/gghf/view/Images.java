@@ -37,9 +37,9 @@ public class Images {
             portal_blue = ImageIO.read(new File("images/portal_blue.png"));
             portal_blue_open = ImageIO.read(new File("images/portal_blue_open.png"));
             portal_green = ImageIO.read(new File("images/portal_green.png"));
-            portal_green_open = ImageIO.read(new File("images/portal_green.png"));
+            portal_green_open = ImageIO.read(new File("images/portal_green_open.png"));
             portal_red = ImageIO.read(new File("images/portal_red.png"));
-            portal_red_open = ImageIO.read(new File("images/portal_red.png"));
+            portal_red_open = ImageIO.read(new File("images/portal_red_open.png"));
             portal_yellow = ImageIO.read(new File("images/portal_yellow.png"));
             portal_yellow_open = ImageIO.read(new File("images/portal_yellow_open.png"));
             portal_wall = ImageIO.read(new File("images/portal_wall.png"));
