@@ -10,7 +10,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
-public class Replicator extends Moveable implements Controllable, Shootable, Graphic {
+public class Replicator extends Moveable implements Controllable, Shootable {
     protected Map map;
 
     public Replicator(Map map) {

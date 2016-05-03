@@ -50,7 +50,7 @@ public class Controller {
 				cmd = "shootportal 0 blue";
 				break;
 			case 'r':
-				cmd = "shootportal 0 yellow"; //joló
+				cmd = "shootportal 0 yellow"; //jolï¿½
 				break;
 			case 'o':
 				cmd = "shootportal 1 red";
@@ -61,9 +61,15 @@ public class Controller {
 			case 'q':
 				cmd = "pickbox 0";
 				break;
+            case 'x':
+                cmd = "dropbox 0";
+                break;
 			case 'u':
 				cmd = "pickbox 1";
 				break;
+            case 'm':
+                cmd = "dropbox 1";
+                break;
 			default:
 				cmd = "";
 				break;

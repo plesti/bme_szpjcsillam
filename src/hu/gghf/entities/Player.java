@@ -10,7 +10,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
-public class Player extends Moveable implements Controllable, Graphic {
+public class Player extends Moveable implements Controllable {
     private Box carryObject;
     protected Map map;
 
@@ -133,7 +133,7 @@ public class Player extends Moveable implements Controllable, Graphic {
                 Point boxpos = box.getPosition();
                 CellInterface boxcell = map.getMapObject(boxpos);
 
-                boxcell.onStepOut(this);
+                boxcell.onStepOut(box);
                 setDirection(newdir);
                 box.setPosition(newpos);
                 newcell.onStepIn(box);
