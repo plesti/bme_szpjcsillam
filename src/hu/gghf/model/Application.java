@@ -16,35 +16,18 @@ import java.io.InputStreamReader;
 import java.util.Random;
 
 public class Application {
-    public static BufferedReader br = null;
     public static boolean test = false;
+    private static Window view;
     private ReplicatorThread autopilot;
     public boolean exit = false;
     private static Map map = null;
-    private static Window view = null;
-    private static Controller control = null;
 
     public static void main(String[] args) throws InterruptedException {
-        br = new BufferedReader(new InputStreamReader(System.in));
         Application app = new Application();
         app.sendCommand("loadmap palya.csv");
-        view = new Window(app,map);
-        control = new Controller(view);
-        
-        while (!app.exit) {
-            try {
-            	view.draw();
-                //String s = br.readLine();
-                //app.sendCommand(s);
-				//  app.printmap();
-            } 
-            /*catch (IOException e) {
-                e.printStackTrace();
-            }*/
-            catch (InterruptedException e) {
-            	e.printStackTrace();
-            }
-        }
+
+        view = new Window(app, map);
+        Controller control = new Controller(view);
     }
 
     public Application() {
@@ -52,12 +35,14 @@ public class Application {
         
         autopilot = new ReplicatorThread(this);
         autopilot.start();
-        
     }
 
     public static void printCall(Object obj, String msg) {
 //        System.out.println(String.format("[%s] %s", obj.getClass().getSimpleName(), msg));
-        System.out.println(msg);
+//        System.out.println(msg);
+        if (view != null && view.getConsole() != null) {
+            view.getConsole().setText(msg);
+        }
     }
 
     /**

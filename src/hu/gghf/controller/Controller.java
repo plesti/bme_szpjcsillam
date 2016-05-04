@@ -75,12 +75,13 @@ public class Controller {
 				break;
 			}
 			w.sendCommand(cmd);
-			try {
-				w.draw();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+            w.getMapPanel().repaint();
+//			try {
+//				w.draw();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 
 		@Override
