@@ -54,7 +54,14 @@ public class Player extends Moveable implements Controllable {
 
         Box box = map.getBox(frontpos);
         if (box != null) {
-            setCarry(box);
+        	if (this.carryObject == null)
+        		this.setCarry(box);
+        	if ((this.getClass() != Jaffa.class) && (map.getPlayer("1").getCarry() == box)) {
+        	map.getPlayer("1").dropBox();
+        	}
+        	else if ((this.getClass() == Jaffa.class) && (map.getPlayer("0").getCarry() == box)) {
+            	map.getPlayer("0").dropBox();
+            	}
         }
     }
 
