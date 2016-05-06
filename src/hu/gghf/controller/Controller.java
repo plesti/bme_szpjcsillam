@@ -1,5 +1,7 @@
 package hu.gghf.controller;
 
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -14,6 +16,7 @@ public class Controller {
 	public Controller(Window w) {
 		this.w = w;
 		w.addKeyListener(new MoveEventer());
+		w.addFocusListener(new FocusEventer());
 	}
 	
 	public class MoveEventer implements KeyListener {
@@ -97,5 +100,21 @@ public class Controller {
 		}
 		
 	}
+	
+	public class FocusEventer implements FocusListener {
+
+		@Override
+		public void focusGained(FocusEvent arg0) {
+			// TODO Auto-generated method stub
+			w.getMapPanel().repaint();
+		}
+
+		@Override
+		public void focusLost(FocusEvent arg0) {
+			// TODO Auto-generated method stub
+			w.getMapPanel().repaint();
+		}
+	}
+
 
 }

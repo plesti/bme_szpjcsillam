@@ -10,9 +10,7 @@ import java.awt.*;
 public class Window extends JFrame {
 	private Application a;
     private Label console;
-
-
-
+    private Thread wthread;
     private MapPanel mapPanel;
 
 	public Window(Application a, Map map) { 
@@ -32,6 +30,8 @@ public class Window extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setVisible(true);
+		wthread = new Thread(new WindowThread());
+		wthread.start();
 	}
 
     public Label getConsole() {
@@ -44,5 +44,20 @@ public class Window extends JFrame {
 
 	public void sendCommand(String cmd) {
 		a.sendCommand(cmd);
+	}
+	
+	public class WindowThread implements Runnable {
+
+		@Override
+		public void run() {
+			try {
+				mapPanel.repaint();
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 }
