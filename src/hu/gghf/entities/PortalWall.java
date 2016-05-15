@@ -8,12 +8,11 @@ import hu.gghf.view.Images;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PortalWall extends Location implements CellInterface {
-    private static PortalWall blue = null;
-    private static PortalWall yellow = null;
-    private static PortalWall red = null;
-    private static PortalWall green = null;
+    private static Map<Color, PortalWall> portals = new HashMap<>();
 
     public PortalWall(Point position) {
         this.setPosition(position);
@@ -21,46 +20,44 @@ public class PortalWall extends Location implements CellInterface {
 
     @Override
     public boolean isStepable() {
-        if (blue == this  && yellow != null) {
+        if (portals.get(Color.BLUE) == this && portals.containsKey(Color.YELLOW)) {
             return true;
-        } else if (yellow == this  && blue != null) {
+        } else if (portals.get(Color.YELLOW) == this && portals.containsKey(Color.BLUE)) {
             return true;
-        } else if (red == this  && green != null) {
+        } else if (portals.get(Color.RED) == this && portals.containsKey(Color.GREEN)) {
             return true;
-        } else if (green == this  && red != null) {
+        } else if (portals.get(Color.GREEN) == this && portals.containsKey(Color.RED)) {
             return true;
         }
         return false;
     }
 
     public Color getColor() {
-        if (blue == this) {
-            return Color.BLUE;
-        } else if (yellow == this) {
-            return Color.YELLOW;
-        } else if (red == this) {
-            return Color.RED;
-        } else if (green == this) {
-            return Color.GREEN;
+        for (Color color : portals.keySet()) {
+            if (portals.get(color) == this) {
+                return color;
+            }
         }
         return null;
     }
 
     @Override
     public void onStepIn(Moveable object) {
-        if (blue == this && yellow != null) {
-            object.setPosition(yellow.getPosition());
-            object.setDirection(yellow.getDirection());
-        } else if (yellow == this && blue != null) {
-            object.setPosition(blue.getPosition());
-            object.setDirection(blue.getDirection());
-        } else if (red == this && green != null) {
-            object.setPosition(green.getPosition());
-            object.setDirection(green.getDirection());
-        } else if (green == this && red != null) {
-            object.setPosition(red.getPosition());
-            object.setDirection(red.getDirection());
+        Color color = getColor();
+        PortalWall otherside = null;
+        if (color == Color.BLUE && portals.containsKey(Color.YELLOW)) {
+            otherside = portals.get(Color.YELLOW);
+        } else if (color == Color.YELLOW && portals.containsKey(Color.BLUE)) {
+            otherside = portals.get(Color.BLUE);
+        } else if (color == Color.RED && portals.containsKey(Color.GREEN)) {
+            otherside = portals.get(Color.GREEN);
+        } else if (color == Color.GREEN && portals.containsKey(Color.RED)) {
+            otherside = portals.get(Color.RED);
+        } else {
+            return;
         }
+        object.setPosition(otherside.getPosition());
+        object.setDirection(otherside.getDirection());
     }
 
     @Override
@@ -74,18 +71,22 @@ public class PortalWall extends Location implements CellInterface {
 
     @Override
     public void shot(Player player, Color color) {
-        if (color == Color.BLUE) {
-            blue = this;
-        } else if (color == Color.YELLOW) {
-            yellow = this;
-        } else if (color == Color.RED) {
-            red = this;
-        } else if (color == Color.GREEN) {
-            green = this;
+//        Remove the any other color from this portal
+        if (portals.containsValue(this)) {
+            portals.remove(this.getColor());
+        }
+
+//        Set color for this portal
+        if (portals.containsKey(color)) {
+            portals.replace(color, this);
+        } else {
+            portals.put(color, this);
         }
 
         Direction pdir = player.getDirection();
 
+//        Set the direction of this portal opposite to the player
+//        When a player steps teleports to this portal this direction will be applied
         switch (pdir) {
             case UP:
                 setDirection(Direction.DOWN);
@@ -101,7 +102,7 @@ public class PortalWall extends Location implements CellInterface {
                 break;
         }
 
-        Application.printCall(this, String.format("Portal loves: [%s,%s] %s -> %s",
+        Application.printCall(String.format("Portal loves: [%s,%s] %s -> %s",
                 getPosition().x,
                 getPosition().y,
                 color,

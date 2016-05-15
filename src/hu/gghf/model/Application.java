@@ -17,9 +17,9 @@ import java.util.Random;
 
 public class Application {
     public static boolean test = false;
-    private static Window view;
-    private ReplicatorThread autopilot;
     public boolean exit = false;
+    private static Window view;
+    private static ReplicatorThread autopilot;
     private static Map map = null;
 
     public static void main(String[] args) throws InterruptedException {
@@ -32,14 +32,13 @@ public class Application {
 
     public Application() {
         Images.load();
-        
+
+//        Start automatic movement for replicator
         autopilot = new ReplicatorThread(this);
         autopilot.start();
     }
 
-    public static void printCall(Object obj, String msg) {
-//        System.out.println(String.format("[%s] %s", obj.getClass().getSimpleName(), msg));
-//        System.out.println(msg);
+    public static void printCall(String msg) {
         if (view != null && view.getConsole() != null) {
             view.getConsole().setText(msg);
         }
@@ -55,10 +54,10 @@ public class Application {
         if (parts[0].equals("loadmap")) {
             try {
                 map = Map.load(parts[1]);
-                printCall(Map.class, "Sikeresen betoltve: " + parts[1]);
+                printCall("Sikeresen betoltve: " + parts[1]);
             } catch (IOException e) {
 //                e.printStackTrace();
-                printCall(this, "Palya betoltese sikertelen: " + (new File(parts[1]).getAbsolutePath()));
+                printCall("Palya betoltese sikertelen: " + (new File(parts[1]).getAbsolutePath()));
             }
         }
         else if (parts[0].equals("move")) {
@@ -68,7 +67,7 @@ public class Application {
                 if (parts[1].equals("0") || parts[1].equals("1")) {
                     Player p = map.getPlayer(parts[1]);
                     if (p == null) {
-                        printCall(this, "A \"" + parts[1] + "\" jatekos nem letezek");
+                        printCall("A \"" + parts[1] + "\" jatekos nem letezek");
                         return;
                     }
                     switch (dir) {
@@ -85,17 +84,16 @@ public class Application {
                             p.move(Location.Direction.RIGHT);
                             break;
                         default:
-                            printCall(this, "Nem tamogatott irany:" + dir);
+                            printCall("Nem tamogatott irany:" + dir);
                             break;
                     }
-                    printCall(this, String.format("Uj pozicio [%s]: [%s,%s] %s", parts[1],
+                    printCall(String.format("Uj pozicio [%s]: [%s,%s] %s", parts[1],
                         p.getPosition().x,
                         p.getPosition().y,
                         p.getDirection()));
                 } else if (parts[1].equals("2")) {
                     Replicator p = map.getReplicator();
                     if (p == null) {
-                        printCall(this, "A replikator nem letezek");
                         return;
                     }
                     switch (dir) {
@@ -112,7 +110,7 @@ public class Application {
                             p.move(Location.Direction.RIGHT);
                             break;
                     }
-                    printCall(this, String.format("Uj pozicio [%s]: [%s,%s] %s", parts[1],
+                    printCall(String.format("Uj pozicio [%s]: [%s,%s] %s", parts[1],
                         p.getPosition().x,
                         p.getPosition().y,
                         p.getDirection()));
@@ -124,7 +122,7 @@ public class Application {
             if (map != null && parts.length > 2) {
                 Player p = map.getPlayer(parts[1]);
                 if (p == null) {
-                    printCall(this, "A \"" + parts[1] + "\" jatekos nem letezek");
+                    printCall("A \"" + parts[1] + "\" jatekos nem letezek");
                     return;
                 }
 
@@ -138,7 +136,7 @@ public class Application {
                                 p.shoot(Shootable.Color.YELLOW);
                                 break;
                             default:
-                                printCall(this, "Nem elerheto szin:" + parts[2]);
+                                printCall("Nem elerheto szin:" + parts[2]);
                                 break;
                         }
                         break;
@@ -151,7 +149,7 @@ public class Application {
                                 p.shoot(Shootable.Color.RED);
                                 break;
                             default:
-                                printCall(this, "Nem elerheto szin:" + parts[2]);
+                                printCall("Nem elerheto szin:" + parts[2]);
                                 break;
                         }
                         break;
@@ -162,17 +160,17 @@ public class Application {
             if (map != null && parts.length > 1) {
                 Player p = map.getPlayer(parts[1]);
                 if (p == null) {
-                    printCall(this, "A \"" + parts[1] + "\" jatekos nem letezek");
+                    printCall("A \"" + parts[1] + "\" jatekos nem letezek");
                     return;
                 }
 
                 p.pickUpBox();
                 if (p.getCarry() != null) {
-                    printCall(this, String.format("Doboz felvetele [%s]: [%s,%s]", parts[1],
+                    printCall(String.format("Doboz felvetele [%s]: [%s,%s]", parts[1],
                             p.posInDirection(p.getDirection(), 1).x,
                             p.posInDirection(p.getDirection(), 1).y));
                 } else {
-                    printCall(this, "Doboz felvetele [" + parts[1] + "]: sikertelen");
+                    printCall("Doboz felvetele [" + parts[1] + "]: sikertelen");
                 }
             }
         }
@@ -180,7 +178,7 @@ public class Application {
             if (map != null && parts.length > 1) {
                 Player p = map.getPlayer(parts[1]);
                 map.getPlayer(parts[1]).dropBox();
-                printCall(this, String.format("Doboz letetele [%s]: [%s,%s]", parts[1],
+                printCall(String.format("Doboz letetele [%s]: [%s,%s]", parts[1],
                         p.posInDirection(p.getDirection(), 1).x,
                         p.posInDirection(p.getDirection(), 1).y));
             }
@@ -192,18 +190,21 @@ public class Application {
         }
         else if (parts[0].equals("testmode")) {
             test = true;
-            printCall(this, "Determinisztikus uzemmod aktivalva");
+            printCall("Determinisztikus uzemmod aktivalva");
         }
         else if (parts[0].equals("quit")) {
             autopilot.stopThread();
             if (map != null)
                 exit = true;
         }
+        if (view != null) {
+            view.getMapPanel().repaint();
+        }
     }
 
     public void printmap() {
         if (map == null) {
-            printCall(this, "Map is not initialized");
+            printCall("Map is not initialized");
             return;
         }
         Player top_player = map.getPlayer("0");

@@ -21,7 +21,7 @@ public class Replicator extends Moveable implements Controllable, Shootable {
     public void destroy() {
         map.setReplicator(null);
         map.setMapObject(this.position, new EmptyCell());
-        Application.printCall(this, "Replikator meghalt a szakadekban!");
+        Application.printCall("Replikator meghalt a szakadekban!");
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Replicator extends Moveable implements Controllable, Shootable {
     @Override
     public void shot(Player player, Color color) {
         map.setReplicator(null);
-        Application.printCall(this, "Replikator meghalt!");
+        Application.printCall("Replikator meghalt!");
     }
 
     @Override

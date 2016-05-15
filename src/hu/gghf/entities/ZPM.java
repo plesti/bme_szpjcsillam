@@ -45,7 +45,7 @@ public class ZPM implements CellInterface {
                 putInfrontZPM(obj);
             }
 
-            Application.printCall(this, "ZPM felveve: " + zpm_counter.get(obj));
+            Application.printCall("ZPM felveve: " + zpm_counter.get(obj));
         }
     }
 
@@ -68,7 +68,6 @@ public class ZPM implements CellInterface {
             int y = random.nextInt(this.map.maxsize);
             point = new Point(x, y);
             cell = map.getMapObject(point);
-//            System.out.println("x:" + x + " y:" + y);
         }
         map.setMapObject(point, new ZPM(map));
     }
@@ -88,7 +87,6 @@ public class ZPM implements CellInterface {
 
     @Override
     public void shot(Player player, Color color) {
-
     }
 
     public static int getZPMCount(Moveable object) {

@@ -78,7 +78,7 @@ public class Controller {
 				break;
 			}
 			w.sendCommand(cmd);
-            w.getMapPanel().repaint();
+//            w.getMapPanel().repaint();
 //			try {
 //				w.draw();
 //			} catch (InterruptedException e) {

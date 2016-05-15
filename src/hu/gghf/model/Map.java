@@ -194,7 +194,7 @@ public class Map {
                     	}
                     	break;
                     default:
-                        Application.printCall(map, "Nem ismert palyaelem a forrasfajlban! \"" + params[j] + "\"");
+                        Application.printCall("Nem ismert palyaelem a forrasfajlban! \"" + params[j] + "\"");
                         map.setMapObject(p, new EmptyCell());
                         break;
                 }

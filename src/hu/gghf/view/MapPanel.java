@@ -2,16 +2,19 @@ package hu.gghf.view;
 
 import hu.gghf.entities.Player;
 import hu.gghf.entities.Replicator;
+import hu.gghf.entities.ZPM;
 import hu.gghf.model.Map;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MapPanel extends Panel {
+    private final Font font;
     private Map map;
 
     public MapPanel(Map map) {
         this.map = map;
+        this.font = new Font("CounterFont", Font.PLAIN, 15);
     }
 
     @Override
@@ -39,15 +42,19 @@ public class MapPanel extends Panel {
                 Point pos = rep.getPosition();
                 canvas.drawImage(rep.getImage(), pos.x * wsize, pos.y * hsize, wsize, hsize, this);
             }
-            Player player;
-            if ((player = map.getPlayer("1")) != null) {
-                Point pos = player.getPosition();
-                canvas.drawImage(player.getImage(), pos.x * wsize, pos.y * hsize, wsize, hsize, this);
+            Player player1;
+            if ((player1 = map.getPlayer("1")) != null) {
+                Point pos = player1.getPosition();
+                canvas.drawImage(player1.getImage(), pos.x * wsize, pos.y * hsize, wsize, hsize, this);
             }
-            if ((player = map.getPlayer("0")) != null) {
-                Point pos = player.getPosition();
-                canvas.drawImage(player.getImage(), pos.x * wsize, pos.y * hsize, wsize, hsize, this);
+            Player player2;
+            if ((player2 = map.getPlayer("0")) != null) {
+                Point pos = player2.getPosition();
+                canvas.drawImage(player2.getImage(), pos.x * wsize, pos.y * hsize, wsize, hsize, this);
             }
+            canvas.setFont(this.font);
+            canvas.drawString("Oneil: " + ZPM.getZPMCount(player2), 10, font.getSize());
+            canvas.drawString("Jaffa: " + ZPM.getZPMCount(player1), 10, 2*font.getSize());
         }
         graphics.drawImage(buffer, 0, 0, this);
     }

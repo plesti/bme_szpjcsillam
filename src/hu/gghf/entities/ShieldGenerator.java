@@ -8,9 +8,6 @@ import hu.gghf.view.Images;
 import java.awt.image.BufferedImage;
 
 public class ShieldGenerator implements CellInterface {
-    public ShieldGenerator() {
-    }
-
     @Override
     public boolean isStepable() {
         return true;
@@ -21,7 +18,7 @@ public class ShieldGenerator implements CellInterface {
         int zpms = ZPM.getZPMCount(object);
 
         if (zpms >= 4) {
-            Application.printCall(this, "Jatekos nyert!");
+            Application.printCall("Jatekos nyert!");
         }
     }
 
