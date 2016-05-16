@@ -2,8 +2,10 @@ package hu.gghf.entities;
 
 import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Moveable;
-import hu.gghf.model.Application;
+import hu.gghf.model.GameEventHandler;
 import hu.gghf.model.Map;
+import hu.gghf.view.Application;
+import hu.gghf.view.ConsoleApplication;
 import hu.gghf.view.Images;
 
 import java.awt.*;
@@ -27,7 +29,7 @@ public class ZPM implements CellInterface {
 
     @Override
     public void onStepIn(Moveable obj) {
-        if (!discovered) {
+        if (!discovered && (obj.getClass() == Jaffa.class || obj.getClass() == Player.class)) {
             int zpms = 0;
 
             if (zpm_counter.containsKey(obj)) {
@@ -39,13 +41,12 @@ public class ZPM implements CellInterface {
             }
             discovered = true;
 
-            if (!Application.test && obj.getClass() == Player.class && zpms == 2) {
-                putRandomZPM();
-            } else if (Application.test && obj.getClass() == Player.class && zpms == 2) {
-                putInfrontZPM(obj);
+            if (obj.getClass() == Player.class && zpms == 2) {
+                // TODO: ez itt szar: ConsoleApplication
+                if (!ConsoleApplication.test) putRandomZPM();
+                else putInfrontZPM(obj);
             }
-
-            Application.printCall("ZPM felveve: " + zpm_counter.get(obj));
+            GameEventHandler.printCall("ZPM felveve: " + zpm_counter.get(obj));
         }
     }
 

@@ -2,7 +2,8 @@ package hu.gghf.entities;
 
 import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Moveable;
-import hu.gghf.model.Application;
+import hu.gghf.model.GameEventHandler;
+import hu.gghf.view.Application;
 import hu.gghf.view.Images;
 
 import java.awt.image.BufferedImage;
@@ -18,7 +19,11 @@ public class ShieldGenerator implements CellInterface {
         int zpms = ZPM.getZPMCount(object);
 
         if (zpms >= 4) {
-            Application.printCall("Jatekos nyert!");
+            try {
+                GameEventHandler.playerWins((Player) object);
+            } catch (Exception e) {
+                GameEventHandler.printCall("Ismeretlen objektum nyert");
+            }
         }
     }
 

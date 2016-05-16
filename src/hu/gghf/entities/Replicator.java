@@ -1,7 +1,8 @@
 package hu.gghf.entities;
 
 import hu.gghf.interfaces.*;
-import hu.gghf.model.Application;
+import hu.gghf.model.GameEventHandler;
+import hu.gghf.view.Application;
 import hu.gghf.model.Map;
 import hu.gghf.view.Images;
 
@@ -21,7 +22,7 @@ public class Replicator extends Moveable implements Controllable, Shootable {
     public void destroy() {
         map.setReplicator(null);
         map.setMapObject(this.position, new EmptyCell());
-        Application.printCall("Replikator meghalt a szakadekban!");
+        GameEventHandler.replicatorDied(this);
     }
 
     @Override
@@ -37,7 +38,7 @@ public class Replicator extends Moveable implements Controllable, Shootable {
     @Override
     public void shot(Player player, Color color) {
         map.setReplicator(null);
-        Application.printCall("Replikator meghalt!");
+        GameEventHandler.replicatorDied(this);
     }
 
     @Override

@@ -2,7 +2,6 @@ package hu.gghf.entities;
 
 import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Moveable;
-import hu.gghf.model.Application;
 import hu.gghf.model.Map;
 import hu.gghf.view.Images;
 

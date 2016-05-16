@@ -3,7 +3,8 @@ package hu.gghf.model;
 import hu.gghf.entities.*;
 import hu.gghf.interfaces.CellInterface;
 import hu.gghf.interfaces.Location;
-import hu.gghf.interfaces.Moveable;
+import hu.gghf.view.Application;
+import hu.gghf.view.ConsoleApplication;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -194,7 +195,7 @@ public class Map {
                     	}
                     	break;
                     default:
-                        Application.printCall("Nem ismert palyaelem a forrasfajlban! \"" + params[j] + "\"");
+                        GameEventHandler.printCall("Nem ismert palyaelem a forrasfajlban! \"" + params[j] + "\"");
                         map.setMapObject(p, new EmptyCell());
                         break;
                 }

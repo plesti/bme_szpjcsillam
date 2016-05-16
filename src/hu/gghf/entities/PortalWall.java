@@ -1,9 +1,11 @@
 package hu.gghf.entities;
 
 import hu.gghf.interfaces.CellInterface;
+import hu.gghf.interfaces.GameEventListener;
 import hu.gghf.interfaces.Location;
 import hu.gghf.interfaces.Moveable;
-import hu.gghf.model.Application;
+import hu.gghf.model.GameEventHandler;
+import hu.gghf.view.Application;
 import hu.gghf.view.Images;
 
 import java.awt.*;
@@ -102,7 +104,7 @@ public class PortalWall extends Location implements CellInterface {
                 break;
         }
 
-        Application.printCall(String.format("Portal loves: [%s,%s] %s -> %s",
+        GameEventHandler.printCall(String.format("Portal loves: [%s,%s] %s -> %s",
                 getPosition().x,
                 getPosition().y,
                 color,

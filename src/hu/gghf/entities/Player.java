@@ -1,7 +1,8 @@
 package hu.gghf.entities;
 
 import hu.gghf.interfaces.*;
-import hu.gghf.model.Application;
+import hu.gghf.model.GameEventHandler;
+import hu.gghf.view.Application;
 import hu.gghf.model.Map;
 import hu.gghf.view.Images;
 
@@ -37,7 +38,7 @@ public class Player extends Moveable implements Controllable {
 
     @Override
     public void destroy() {
-        Application.printCall("Jatekos meghalt!");
+        GameEventHandler.playerDied(this);
         if (this.getClass()==Jaffa.class)
         	map.deletePlayer("1");
         else
@@ -56,10 +57,10 @@ public class Player extends Moveable implements Controllable {
         if (box != null) {
             if (this.carryObject == null)
                 this.setCarry(box);
-            if ((this.getClass() != Jaffa.class) && (map.getPlayer("1").getCarry() == box)) {
+            if ((this.getClass() != Jaffa.class) && (map.getPlayer("1") != null) && (map.getPlayer("1").getCarry() == box)) {
                 map.getPlayer("1").dropBox();
             }
-            else if ((this.getClass() == Jaffa.class) && (map.getPlayer("0").getCarry() == box)) {
+            else if ((this.getClass() == Jaffa.class) && (map.getPlayer("0") != null) && (map.getPlayer("0").getCarry() == box)) {
                 map.getPlayer("0").dropBox();
             }
         }

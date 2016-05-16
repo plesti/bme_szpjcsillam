@@ -1,22 +1,19 @@
 package hu.gghf.controller;
 
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import hu.gghf.model.Map;
+import hu.gghf.view.Application;
 import hu.gghf.view.Window;
 
 public class Controller {
-
 	private Window w;
-	/*private boolean jaffa_pressed_box = false;
-	private boolean oneil_pressed_box = false;*/
-	public Controller(Window w) {
+    private Application app;
+
+	public Controller(Window w, Application application) {
 		this.w = w;
+        this.app = application;
 		w.addKeyListener(new MoveEventer());
-		w.addFocusListener(new FocusEventer());
 	}
 	
 	public class MoveEventer implements KeyListener {
@@ -77,14 +74,7 @@ public class Controller {
 				cmd = "";
 				break;
 			}
-			w.sendCommand(cmd);
-//            w.getMapPanel().repaint();
-//			try {
-//				w.draw();
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+			app.sendCommand(cmd);
 		}
 
 		@Override
@@ -100,21 +90,4 @@ public class Controller {
 		}
 		
 	}
-	
-	public class FocusEventer implements FocusListener {
-
-		@Override
-		public void focusGained(FocusEvent arg0) {
-			// TODO Auto-generated method stub
-			w.getMapPanel().repaint();
-		}
-
-		@Override
-		public void focusLost(FocusEvent arg0) {
-			// TODO Auto-generated method stub
-			w.getMapPanel().repaint();
-		}
-	}
-
-
 }

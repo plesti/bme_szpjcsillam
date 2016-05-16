@@ -8,5 +8,5 @@ Uj pozicio [0]: [1,1] RIGHT
 Jatekos meghalt!
 Uj pozicio [1]: [1,1] LEFT
 |x |x |x |
-|0 |a>|0 |
+|0 |h |0 |
 |x |x |x |

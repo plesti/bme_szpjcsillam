@@ -1,6 +1,7 @@
 package hu.gghf.test;
 
-import hu.gghf.model.Application;
+import hu.gghf.model.GameEventHandler;
+import hu.gghf.view.ConsoleApplication;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -52,7 +53,10 @@ public class Test {
 
         brconsole = new BufferedReader(new InputStreamReader(System.in));
         PrintStream stdout = System.out;
-        Application app = new Application();
+        ConsoleApplication app = new ConsoleApplication();
+
+        // Every event is handled by the console app
+        GameEventHandler.setHandler(app);
 
         System.out.println("Valaszd ki a sorszamat annak a testnek amelyiket futtatni szeretned:");
         for (int i = 0; i < inFilecount; i++) {
