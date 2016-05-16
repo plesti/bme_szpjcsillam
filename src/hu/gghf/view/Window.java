@@ -2,6 +2,7 @@ package hu.gghf.view;
 
 import javax.swing.*;
 
+import hu.gghf.entities.Jaffa;
 import hu.gghf.entities.Player;
 import hu.gghf.entities.Replicator;
 import hu.gghf.interfaces.GameEventListener;
@@ -49,15 +50,21 @@ public class Window extends JFrame implements GameEventListener {
 
     @Override
     public void playerDied(Player player) {
-        this.printCall("Jatekos meghalt!");
+        if (player.getClass() != Jaffa.class) {
+            JOptionPane.showMessageDialog(this,
+                    "Jaffa nyert!",
+                    "Jatek vege",
+                    JOptionPane.PLAIN_MESSAGE);
+        }
     }
 
     @Override
     public void playerWins(Player player) {
-        JOptionPane.showMessageDialog(this,
-                player + " nyert!",
-                "Játék vége",
-                JOptionPane.PLAIN_MESSAGE);
+        if (player.getClass() == Jaffa.class) {
+            JOptionPane.showMessageDialog(this, "Jaffa nyert!", "Jatek vege", JOptionPane.PLAIN_MESSAGE);
+        } else if (player.getClass() == Player.class) {
+            JOptionPane.showMessageDialog(this, "Oneil nyert!", "Jatek vege", JOptionPane.PLAIN_MESSAGE);
+        }
     }
 
     @Override
