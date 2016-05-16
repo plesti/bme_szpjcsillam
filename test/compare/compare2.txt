@@ -1,1 +1,0 @@
-Palya betoltese sikertelen: c:\projektek\intellij\forgatott\test\mapok\nem_letezo.csv

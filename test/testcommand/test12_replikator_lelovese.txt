@@ -1,6 +1,0 @@
-testmode
-loadmap test/mapok/test12_repl_shoot.csv
-showmap
-shootportal 0 blue
-showmap
-quit

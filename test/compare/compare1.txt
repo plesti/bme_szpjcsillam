@@ -1,6 +1,0 @@
-Determinisztikus uzemmod aktivalva
-Sikeresen betoltve: test/mapok/test1_betoltes.csv
-|x |n |d |b |
-|f>|a>|r>|0 |
-|g |z |h |p |
-|0 |0 |0 |0 |

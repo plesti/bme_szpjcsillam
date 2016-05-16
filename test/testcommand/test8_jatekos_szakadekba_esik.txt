@@ -1,7 +1,0 @@
-testmode
-loadmap test/mapok/test8_player_hole.csv
-showmap
-move 0 right
-move 1 left
-showmap
-quit

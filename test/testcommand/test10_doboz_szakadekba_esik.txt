@@ -1,8 +1,0 @@
-testmode
-loadmap test/mapok/test10_box_hole.csv
-showmap
-pickbox 0
-move 0 up
-dropbox 0
-showmap
-quit
